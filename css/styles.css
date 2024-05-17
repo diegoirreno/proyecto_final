@@ -1,0 +1,24 @@
+/* *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.centered-container {
+    height: 120vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} */
+
+.abs-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+  
+  .form {
+    width: 450px;
+  }
+

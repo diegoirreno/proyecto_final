@@ -1,0 +1,28 @@
+.carousel-indicators li{
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    background-color: dodgerblue;
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.tb {
+    overflow-y:auto;
+    display: flex;
+    max-height: 230px;
+}
+
+.tb::-webkit-scrollbar{
+    width: 5px;
+    background-color: lavender;
+}
+
+.tb::-webkit-scrollbar-thumb{
+    background-color:lightskyblue;
+    border-radius: 3px;
+}
