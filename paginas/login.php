@@ -17,7 +17,7 @@
             <nav class="row navbar navbar-expand-md navbar-light bg-light border-bottom border-primary">
 
                 <div class="col-3">
-                    <a href="../index.php" class="navbar-brand">Distribuciones Irreño</a>
+                    <a href="../indexF.php" class="navbar-brand">Distribuciones Irreño</a>
                     <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#Menu">
                         <span class="navbar-toggler-icon">
                         </span>
@@ -93,7 +93,7 @@
                     </div>-->
                     <div class="text-center mt-3">
                         <input class="btn btn-outline-primary" type="submit" value="Registrar" name="registro" class="form-control border border-dark border-1">
-                        <a href="login.php" >Aceptar</a>
+                        <a class="nav-link" href="../indexF.php">Volver</a>
                        <!-- <a href="../indexV4.html" class="btn btn-outline-primary">
                             <button type="submit" class="btn btn-outline-primary">Aceptar</button>
                             Aceptar
@@ -107,7 +107,7 @@
     <footer>
         <div class="container-fluid bg-light p-0">
             <nav class="row navbar navbar-expand-md navbar-light bg-light">
-                <a href="../index.php" class="col navbar-brand">Distribuciones Irreño</a>
+                <a href="../indexF.php" class="col navbar-brand">Distribuciones Irreño</a>
                 <ul class="col list-unstyled">
                     <li>
                         <h5>Acerca de nosotros</h5>

@@ -15,7 +15,7 @@
             <nav class="row navbar navbar-expand-md navbar-light bg-light border-bottom border-primary">
 
                 <div class="col-3">
-                    <a href="../index.php" class="navbar-brand">Distribuciones Irreño</a>
+                    <a href="../indexF.php" class="navbar-brand">Distribuciones Irreño</a>
                     <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#Menu">
                         <span class="navbar-toggler-icon">
                         </span>
@@ -38,8 +38,8 @@
                         </div>
                         <div class="col-4 col-sm-6 p-0">
                             <li class="nav-item d-flex align-items-center"> 
-                                <a target="_blank" class="nav-link" href="./login.html">Registrarse</a>
-                                <a target="_blank" type="button" href="./colaPedido.html" class="btn btn-outline-primary">
+                                <a target="_blank" class="nav-link" href="login.php">Registrarse</a>
+                                <a target="_blank" type="button" href="colaPedido.php" class="btn btn-outline-primary">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
                                         <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 
                                         3H.5a.5.5 0 0 1-.5-.5M3.14 5l.5 2H5V5zM6 5v2h2V5zm3 0v2h2V5zm3 0v2h1.36l.5-2zm1.11 3H12v2h.61zM11 8H9v2h2zM8 8H6v2h2zM5 8H3.89l.5 2H5zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0m9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0"/>
@@ -176,7 +176,7 @@
                                             COP*</small>
                                     </p>
                                     <!-- Botón añadir al pedido -->
-                                    <a href="./verProducto.html" target="_blank" class="btn btn-primary">Añadir al pedido</a>
+                                    <a href="./verProducto.php" class="btn btn-primary">Añadir al pedido</a>
                                 </div>
                             </div>
                         </div>
@@ -195,7 +195,7 @@
                                     <p class="card-text">Burbujas Jet x12</p>
                                     <p class="card-text text-end"><small class="text-body-secondary">#### $ COP*</small>
                                         <!-- Botón añadir al pedido -->
-                                        <a href="./verProducto.html" target="_blank" class="btn btn-primary">Añadir al pedido</a>
+                                        <a href="./verProducto.php" class="btn btn-primary">Añadir al pedido</a>
                                 </div>
                             </div>
                         </div>
@@ -220,7 +220,7 @@
                                         <li>Precio: $100</li>
                                     </ul>
                                     <!-- Botón añadir al pedido -->
-                                    <a href="./verProducto.php" target="_blank" class="btn btn-primary">Añadir al pedido</a>
+                                    <a href="./verProducto.php" class="btn btn-primary">Añadir al pedido</a>
                                 </div>
                             </div>
                         </div>
@@ -232,7 +232,7 @@
     <footer>
         <div class="container-fluid bg-light p-0">
             <nav class="row navbar navbar-expand-md navbar-light bg-light">
-                <a href="../index.php" class="col navbar-brand">Distribuciones Irreño</a>
+                <a href="indexF.php" class="col navbar-brand">Distribuciones Irreño</a>
                 <ul class="col list-unstyled">
                     <li>
                         <h5>Acerca de nosotros</h5>
