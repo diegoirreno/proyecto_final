@@ -15,7 +15,7 @@
         <div class="container-fluid p-0">
             <nav class="row navbar navbar-expand-md navbar-light bg-light border-bottom border-primary">
                 <div class="col-3"> 
-                    <a href="./indexAdmin.html" class="navbar-brand">Distribuciones Irreño</a>
+                    <a href="./indexAdmin.php" class="navbar-brand">Distribuciones Irreño</a>
                 </div>     
             </nav>
             <div class="row">
@@ -54,7 +54,7 @@
     <footer>
         <div class="container-fluid bg-light p-0">
             <nav class="row navbar navbar-expand-md navbar-light bg-light">
-                <a href="./indexAdmin.html" class="col navbar-brand">Distribuciones Irreño</a>
+                <a href="./indexAdmin.php" class="col navbar-brand">Distribuciones Irreño</a>
                 <ul class="col list-unstyled">
                     <li>
                         <h5>Acerca de nosotros</h5>

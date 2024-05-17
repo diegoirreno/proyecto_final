@@ -8,7 +8,7 @@ if(!empty($_POST["registro"])){
         $apellido=$_POST["lastname"];
         $email=$_POST["email"];
         $telefono=$_POST["cellphone"];
-        $sql=$conexion->query(" insert into persona(cedula,nombres,apellidos,correo,telefono)values(' $cedula','$nombre','$apellido',' $email','$telefono')");
+        $sql = $conexion->query(" insert into persona(cedula,nombres,apellidos,correo,telefono)values(' $cedula','$nombre','$apellido',' $email','$telefono')");
         if($sql==1)
         {
             echo '<div>Usuario registrado correctamente</div>';
