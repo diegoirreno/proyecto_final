@@ -58,18 +58,14 @@
     <main>
         <div class="container">
             <div class="abs-center">
-                <form action="" method="POST" class="border p-3 form">
+                <form action="../paginas/registro_cliente.php" method="POST" class="border p-3 form">
                     <div class="text-center mb-4">
                         <img src="../sources/login.png" alt="login" width="150">
                         <h2>Registro de usuario</h2>
-                        <?php
-                        include('modelo/conexion_db.php');
-                        include('controlador/controlador_registrousuario.php');
-                        ?>
                     </div>
                     <div class="form-group col-md-12">
                         <label for="id">Documento de identidad</label>
-                        <input type="text" name="id" class="form-control border border-dark border-1">
+                        <input type="text" name="document" class="form-control border border-dark border-1">
                     </div>
                     <div class="form-group col-md-12">
                         <label for="name">Nombre</label>
@@ -87,12 +83,13 @@
                         <label for="cellphone">Telefono</label>
                         <input type="tel" name="cellphone" class="form-control border border-dark border-1">
                     </div>
-                     <!--<div class="form-group col-md-12">
+                    <div class="form-group col-md-12">
                         <label for="address">Direccion</label>
                         <input type="text" name="address" id="address" class="form-control border border-dark border-1">
-                    </div>-->
+                    </div>
                     <div class="text-center mt-3">
-                        <input class="btn btn-outline-primary" type="submit" value="Registrar" name="registro" class="form-control border border-dark border-1">
+                        <!--<input class="btn btn-outline-primary"class="form-control border border-dark border-1">-->
+                        <button type="submit" class="btn btn-outline-primary" >Registrarse</button>
                         <a class="nav-link" href="../indexF.php">Volver</a>
                        <!-- <a href="../indexV4.html" class="btn btn-outline-primary">
                             <button type="submit" class="btn btn-outline-primary">Aceptar</button>
