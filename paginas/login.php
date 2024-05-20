@@ -89,7 +89,7 @@
                     </div>
                     <div class="text-center mt-3">
                         <!--<input class="btn btn-outline-primary"class="form-control border border-dark border-1">-->
-                        <button type="submit" class="btn btn-outline-primary" >Registrarse</button>
+                        <button class="btn btn-outline-primary" >Registrarse</button>
                         <a class="nav-link" href="../indexF.php">Volver</a>
                        <!-- <a href="../indexV4.html" class="btn btn-outline-primary">
                             <button type="submit" class="btn btn-outline-primary">Aceptar</button>

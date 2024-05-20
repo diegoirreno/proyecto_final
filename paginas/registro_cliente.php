@@ -9,25 +9,43 @@
     $telefono = $_POST['cellphone'];
     $direccion = $_POST['address'];
 
-    $query = "INSERT INTO cliente(cedula,nombre,apellido,correo,telefono,direccion) 
-              VALUES('$cedula', '$nombre', '$apellido', '$correo', '$telefono', '$direccion')";
+    
 
     
-    $ejecutar = mysqli_query($conexion, $query);
+    //Verificar que el cliente ya esta registrado
+    
+    $validar = "SELECT * FROM cliente WHERE cedula = '$cedula' || correo = '$correo'";
+    $validando = $conexion->query($validar);
+    if($validando->num_rows > 0){
+        
+        echo'
+            <script>
+                alert("El usuario ya esta registrado, intente nuevamente");
+                window.location = "login.php"
+            </script>
+        ';
 
-    if($ejecutar){
+    }else{
+
+    //insertar clientes a ala base de datos
+    $insertar = "INSERT INTO cliente(cedula,nombre,apellido,correo,telefono,direccion) 
+              VALUES('$cedula', '$nombre', '$apellido', '$correo', '$telefono', '$direccion')";
+    $guardar = $conexion->query($insertar);
+    if($guardar > 0){
         echo'
             <script>
                 alert("Usuario registrado exitosamente");
-                window.location = "../login.php"
+                window.location = "../indexF.php"
             </script>
         ';
     }else{
         echo'
         <script>
             alert("Usuario no registrado, intentar nuevamente");
-            window.location = "../login.php"
+            window.location = "../indexF.php"
         </script>
     ';
+    }
+
     }
 ?>
