@@ -38,7 +38,7 @@
                         </div>
                         <div class="col-4 col-sm-6 p-0">
                             <li class="nav-item d-flex align-items-center"> 
-                                <a class="nav-link" target="_blank" href="./login.html">Registrarse</a>
+                                <a class="nav-link" href="./login.html">Registrarse</a>
                                 <a type="button" href="./colaPedido.html" class="btn btn-outline-primary">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
                                         <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 
@@ -140,7 +140,7 @@
                             Confirmar
                         </button><br>
                     </form>
-                    <a href="./login.php" target="_blank" class="btn p-0">Registrarse</a>
+                    <a href="./login.php" class="btn p-0">Registrarse</a>
                 </div>
             </div>
             <!---->

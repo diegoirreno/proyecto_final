@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <!--Link CSS Bootstrap-->
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" 
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
      <link rel="stylesheet" href="./css/index.css">
 
     <title>Distribuciones Irreño</title>
@@ -16,7 +16,7 @@
             <nav class="row navbar navbar-expand-md navbar-light bg-light border-bottom border-primary">
 
                 <div class="col-3"> 
-                    <a href="index.php" class="navbar-brand">Distribuciones Irreño</a>
+                    <a href="indexF.php" class="navbar-brand">Distribuciones Irreño</a>
                     <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#Menu">
                         <span class="navbar-toggler-icon">
                         </span>
