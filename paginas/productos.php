@@ -232,7 +232,7 @@
     <footer>
         <div class="container-fluid bg-light p-0">
             <nav class="row navbar navbar-expand-md navbar-light bg-light">
-                <a href="indexF.php" class="col navbar-brand">Distribuciones Irreño</a>
+                <a href="../indexF.php" class="col navbar-brand">Distribuciones Irreño</a>
                 <ul class="col list-unstyled">
                     <li>
                         <h5>Acerca de nosotros</h5>
