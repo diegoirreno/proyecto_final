@@ -14,7 +14,7 @@
         <div class="container-fluid p-0">
             <nav class="row navbar navbar-expand-md navbar-light bg-light border-bottom border-primary">
                 <div class="col-3"> 
-                    <a href="../indexAdmin.html" class="navbar-brand">Distribuciones Irreño</a>
+                    <a href="../indexF.php" class="navbar-brand">Distribuciones Irreño</a>
                     <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#Menu">
                         <span class="navbar-toggler-icon">
                         </span>

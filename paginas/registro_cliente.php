@@ -9,9 +9,6 @@
     $telefono = $_POST['cellphone'];
     $direccion = $_POST['address'];
 
-    
-
-    
     //Verificar que el cliente ya esta registrado
     
     $validar = "SELECT * FROM cliente WHERE cedula = '$cedula' || correo = '$correo'";
@@ -20,7 +17,7 @@
         
         echo'
             <script>
-                alert("El usuario ya esta registrado, intente nuevamente");
+                alert("El cliente ya esta registrado, intente nuevamente");
                 window.location = "login.php"
             </script>
         ';
@@ -34,15 +31,15 @@
     if($guardar > 0){
         echo'
             <script>
-                alert("Usuario registrado exitosamente");
+                alert("Cliente registrado exitosamente");
                 window.location = "../indexF.php"
             </script>
         ';
     }else{
         echo'
         <script>
-            alert("Usuario no registrado, intentar nuevamente");
-            window.location = "../indexF.php"
+            alert("Cliente no registrado, intentar nuevamente");
+            window.location = "login.php"
         </script>
     ';
     }

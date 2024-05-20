@@ -32,12 +32,12 @@
                 <div class="caja__trasera">
                     <div class="caja__trasera-login">
                         <h3>¿Ya tienes una cuenta?</h3>
-                        <p>Inicia sesión para entrar en la página</p>
+                        <p>Inicia sesión para entrar en modo administrador</p>
                         <button id="btn__iniciar-sesion">Iniciar Sesión</button>
                     </div>
                     <div class="caja__trasera-register">
-                        <h3>¿Aún no tienes una cuenta?</h3>
-                        <p>Regístrate para que puedas iniciar sesión</p>
+                        <h3>¿Aún no estas registrado?</h3>
+                        <p>Regístrate para iniciar sesión</p>
                         <button id="btn__registrarse">Regístrarse</button>
                     </div>
                 </div>
@@ -53,19 +53,22 @@
                     </form>
 
                     <!--Register-->
-                    <form action="" class="formulario__register">
+                    <form action="paginas/registro_admin.php" method="POST" class="formulario__register">
                         <h2>Regístrarse</h2>
-                        <input type="text" placeholder="Nombre completo">
-                        <input type="text" placeholder="Correo Electronico">
-                        <input type="text" placeholder="Usuario">
-                        <input type="password" placeholder="Contraseña">
+                        <input type="text" placeholder="Cédula" name="cedu_admin">    
+                        <input type="text" placeholder="Nombres" name="name_admin">
+                        <input type="text" placeholder="Apellidos" name="lastname_admin">
+                        <input type="password" placeholder="Contraseña" name="password_admin">
+                        <input type="text" placeholder="Código" name="code_admin">
                         <button>Regístrarse</button>
                     </form>
                 </div>
             </div>
-
         </main>
     <footer>
+        <br>
+        <br>
+        <br>
         <div class="container-fluid bg-light p-0">
             <nav class="row navbar navbar-expand-md navbar-light bg-light">
                 <a href="./indexF.php" class="col navbar-brand">Distribuciones Irreño</a>
