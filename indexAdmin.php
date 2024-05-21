@@ -26,8 +26,7 @@
             </div> 
         </div>
     </header>
-    <main>
-            
+    <main class="m-0">
             <div class="contenedor__todo">
                 <div class="caja__trasera">
                     <div class="caja__trasera-login">
@@ -45,10 +44,10 @@
                 <!--Formulario de Login y registro-->
                 <div class="contenedor__login-register">
                     <!--Login-->
-                    <form action="" class="formulario__login">
+                    <form action="paginas/login_admin.php" method="POST" class="formulario__login">
                         <h2>Iniciar Sesión</h2>
-                        <input type="text" placeholder="Correo Electronico">
-                        <input type="password" placeholder="Contraseña">
+                        <input type="text" placeholder="Cedula" name="cedu_admin">
+                        <input type="password" placeholder="Contraseña" name="pass_admin" >
                         <button>Entrar</button>
                     </form>
 

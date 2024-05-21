@@ -24,7 +24,17 @@
     //Verificar que el administrador ya esta registrado
     $validar = "SELECT * FROM administrador WHERE cedula_admin = '$cedula_admin' ";
     $validando = $conexion->query($validar);
-    if($validando->num_rows > 0){
+    if(empty($cedula_admin) or empty($nombre_admin) or empty($apellido_admin) or empty($contrasena_admin) 
+    or empty($codigo_admin)){
+
+        echo'
+        <script>
+            alert("Uno o mas campos estan vacios, por completarlos todos");
+            window.location = "../indexAdmin.php"
+        </script>
+    ';
+
+    }else if($validando->num_rows > 0){
         
         echo'
             <script>

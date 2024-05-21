@@ -13,12 +13,23 @@
     
     $validar = "SELECT * FROM cliente WHERE cedula = '$cedula' || correo = '$correo'";
     $validando = $conexion->query($validar);
-    if($validando->num_rows > 0){
+
+    if(empty($cedula) or empty($nombre) or empty($apellido) or empty($correo) 
+    or empty($telefono) or empty($direccion)){
+
+        echo'
+        <script>
+            alert("Uno o mas campos estan vacios, por completarlos todos");
+            window.location = "registrar_cli.php"
+        </script>
+    ';
+
+    }else if($validando->num_rows > 0){
         
         echo'
             <script>
                 alert("El cliente ya esta registrado, intente nuevamente");
-                window.location = "login.php"
+                window.location = "registrar_cli.php"
             </script>
         ';
 
@@ -39,7 +50,8 @@
         echo'
         <script>
             alert("Cliente no registrado, intentar nuevamente");
-            window.location = "login.php"
+            window.location = "registrar_cli.php"
+            </script>"
         </script>
     ';
     }
