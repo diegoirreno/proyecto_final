@@ -99,7 +99,7 @@
          <div class="container">
                 <div class="row">
                     <div class="col-md-6 order-md-1">
-                    <a class="nav-link" href="../paginas/catalogo_producto.php">Volver al carrito</a>
+                    <a class="nav-link" href="../paginas/catalogo_producto.php">Volver al catálogo</a>
                                 <?php 
                                 $code = $row['codigo'];
                                 $imagen = "../img/productos_novaventa/" . $code . ".png";
@@ -110,7 +110,7 @@
                         <img src="<?php echo $imagen; ?>" class="img-fluid rounded-start" width="100%">
                     </div>
                     <div class="col-md-6 order-md-2">
-                        <h2><?php echo $nombre; ?></h2>
+                        <h2><?php echo mb_convert_case($nombre,MB_CASE_UPPER); ?></h2>
 
                         <?php if($descuento > 0) { ?>
                             <p><del><?php echo MONEDA . number_format($precio, 0, '.', ',');  ?></del></p>
@@ -127,7 +127,7 @@
 
                         <h3>Código: <?php echo $codigo; ?></h3>
                         <p class="lead">
-                            Descripción: <?php echo $descripcion; ?>
+                            Descripción: <?php echo mb_convert_case($descripcion,MB_CASE_LOWER); ?>
                         </p>  
                         <div class="d-grid gap-3 col-10 mx-auto">
                             <button class="btn btn-outline-primary" type="button">Agregar al carrito</button>

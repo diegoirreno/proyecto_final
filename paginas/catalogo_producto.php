@@ -5,7 +5,7 @@
     $db = new Database();
     $con = $db->conectar();
 
-    $sql = $con->prepare("SELECT codigo,nombre,precio FROM productos WHERE disponibilidad = 1");
+    $sql = $con->prepare("SELECT codigo,nombre,precio FROM productos WHERE disponibilidad = 1 AND catalogo = 1");
     $sql->execute();
     $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 
@@ -84,7 +84,7 @@
                                 ?>
                                 <img src="<?php echo $imagen; ?>" class="img-fluid rounded-start" width="100%">
                                 <div class="card-body">
-                                    <h5 class="card-title"><?php echo $row['nombre']; ?></h5>
+                                    <h5 class="card-title"><?php echo mb_convert_case($row['nombre'],MB_CASE_UPPER); ?></h5>
                                     <p class="card-text text-end"><small class="text-body-secondary">Código: <?php echo $row['codigo']; ?></small>
                                     <p class="card-text text-end"><small class="text-body-secondary">Precio: $<?php echo $row['precio']; ?></small>
                                     </p>
