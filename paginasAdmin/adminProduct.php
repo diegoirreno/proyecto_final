@@ -35,6 +35,7 @@
                 <div class="col-3">
                     <nav class="mx-2">
                         <p class="d-inline-flex">
+                            <!--Boton cerrar sesion-->
                             <a href="../paginas/cerrar_sesion.php">Cerrar sesión</a>
                             <a class="btn btn-primary form-control my-3" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                                 Bases de datos
