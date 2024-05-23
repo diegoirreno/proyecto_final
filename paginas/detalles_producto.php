@@ -1,22 +1,62 @@
+<?php
+
+    include 'config.php';
+    include 'database.php';
+    $db = new Database();
+    $con = $db->conectar();
+
+    $code = isset($_GET['codigo']) ? $_GET['codigo'] : '';
+    $token = isset($_GET['token']) ? $_GET['token'] : '';
+
+    if($code == '' || $token == ''){
+        echo 'Error al procesar la petición';
+        exit;
+    }else{
+
+        $token_tmp = hash_hmac('sha1', $code, KEY_TOCKEN);
+
+        if($token == $token_tmp){
+
+        $sql = $con->prepare("SELECT count(codigo) FROM productos WHERE codigo=? AND disponibilidad = 1");
+        $sql->execute([$code]);
+        if($sql->fetchColumn() > 0){
+
+            $sql = $con->prepare("SELECT codigo,nombre,descripcion,precio,descuento FROM productos WHERE codigo=? AND disponibilidad = 1 
+            LIMIT 1");
+            $sql->execute([$code]);
+            $row = $sql->fetch(PDO::FETCH_ASSOC);
+            $codigo = $row['codigo'];
+            $nombre = $row['nombre'];
+            $descripcion = $row['descripcion'];
+            $precio = $row['precio'];
+            $descuento = $row['descuento'];
+            $precio_desc = $precio - (($precio*$descuento) / 100);
+        }
+        }else{
+        echo 'Error al procesar la petición';
+        exit;
+        }
+    }
+
+?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <!--Link CSS Bootstrap-->
-     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" 
-     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-     <link rel="stylesheet" href="./css/index.css">
-
-    <title>Distribuciones Irreño</title>
+    <title>Catálogo Novaventa</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" 
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body class="container-fluid">
     <header>
         <div class="container-fluid p-0">
             <nav class="row navbar navbar-expand-md navbar-light bg-light border-bottom border-primary">
 
-                <div class="col-3"> 
-                    <a href="indexF.php" class="navbar-brand">Distribuciones Irreño</a>
+                <div class="col-3">
+                    <a href="../indexF.php" class="navbar-brand">Distribuciones Irreño</a>
                     <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#Menu">
                         <span class="navbar-toggler-icon">
                         </span>
@@ -39,12 +79,12 @@
                         </div>
                         <div class="col-4 col-sm-6 p-0">
                             <li class="nav-item d-flex align-items-center"> 
-                                <a class="nav-link" href="paginas/registrar_cli.php">Registrarse</a>
-                                <a type="button" href="paginas/colaPedido.php" class="btn btn-outline-primary">
+                                <a class="nav-link" href="./registrar_cli.php">Registrarse</a>
+                                <a type="button" href="colaPedido.php" class="btn btn-outline-primary">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
                                         <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 
                                         3H.5a.5.5 0 0 1-.5-.5M3.14 5l.5 2H5V5zM6 5v2h2V5zm3 0v2h2V5zm3 0v2h1.36l.5-2zm1.11 3H12v2h.61zM11 8H9v2h2zM8 8H6v2h2zM5 8H3.89l.5 2H5zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0m9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0"/>
-                                    </svg>
+                                        </svg>
                                 </a>
                             </li> 
                         </div>
@@ -54,79 +94,49 @@
             </nav>
         </div>
     </header>
-
-    <!--Hero de la pagina-->
-
     <main>
-        <div class="container-fluid p-0 text-center">
-            <div class="row text-reset">
-                <div class="col bg-dark text-light">
-                    <h4>Nuestros catálogos</h4>
-                </div>
-            </div>
-            <div class="row d-flex align-items-center justify-content-center">
-                <div class="col p-0 bg-light">
-                    <!--Carousel-->
-                    <div id="carouselC" class="carousel slide">
-                        <ol class="carousel-indicators">
-                          <li type="button" data-bs-target="#carouselC" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></li>
-                          <li type="button" data-bs-target="#carouselC" data-bs-slide-to="1" aria-label="Slide 2"></li>
-                          <li type="button" data-bs-target="#carouselC" data-bs-slide-to="2" aria-label="Slide 3"></li>
-                        </ol>
-                        <div class="carousel-inner">
-                          <div class="carousel-item active">
-                            <a href="paginas/catalogo_producto.php">
-                                <img src="./sources/architecture-3121009_1920.jpg" width="1920" height="400" class="d-block w-100" alt="slide1">
-                            </a>
-                          </div>
-                          <div class="carousel-item">
-                            <a href="paginas/productos.php">
-                                <img src="./sources/hamburg-8573427_1920.jpg" width="1920" height="400" class="d-block w-100" alt="slide2">
-                            </a>
-                          </div>
-                          <div class="carousel-item">
-                            <a href="paginas/productos.php">
-                                <img src="./sources/river-6858013_1920.jpg" width="1920" height="400" class="d-block w-100" alt="slide3">
-                            </a>
-                          </div>
-                        </div>
-                        <a class="carousel-control-prev" type="button" href="#carouselC" data-bs-slide="prev">
-                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                          <span class="sr-only">Anterior</span>
-                        </a>
-                        <a class="carousel-control-next" type="button" href="#carouselC" data-bs-slide="next">
-                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                          <span class="sr-only">Siguiente</span>
-                        </a>
-                      </div>
+        <br>
+         <div class="container">
+                <div class="row">
+                    <div class="col-md-6 order-md-1">
+                    <a class="nav-link" href="../paginas/catalogo_producto.php">Volver al carrito</a>
+                                <?php 
+                                $code = $row['codigo'];
+                                $imagen = "../img/productos_novaventa/" . $code . ".png";
+                                if(!file_exists($imagen)){
+                                    $imagen = "../img/login.png";   
+                                }
+                                ?>
+                        <img src="<?php echo $imagen; ?>" class="img-fluid rounded-start" width="100%">
+                    </div>
+                    <div class="col-md-6 order-md-2">
+                        <h2><?php echo $nombre; ?></h2>
+
+                        <?php if($descuento > 0) { ?>
+                            <p><del><?php echo MONEDA . number_format($precio, 0, '.', ',');  ?></del></p>
+                            <h2>
+                            <?php echo MONEDA . number_format($precio_desc, 0, '.', ','); ?>
+                            <small class="text-success"><?php echo $descuento; ?>% descuento</small>
+                            </h2>
+
+                        <?php }else{ ?>
+        
+                            <h2><?php echo MONEDA . number_format($precio, 0, '.', ','); ?></h2>
+
+                        <?php } ?>
+
+                        <h3>Código: <?php echo $codigo; ?></h3>
+                        <p class="lead">
+                            Descripción: <?php echo $descripcion; ?>
+                        </p>  
+                        <div class="d-grid gap-3 col-10 mx-auto">
+                            <button class="btn btn-outline-primary" type="button">Agregar al carrito</button>
+                        </div>  
                     </div>
                 </div>
-            </div>
-            <div class="row bg-dark text-light">
-                <ul class="col mt-3 list-unstyled">
-                    <li>
-                        <h4>¿Quiénes somos?</h4>
-                    </li>
-                    <li>
-                        <p class="text-justify">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum ullam quia, animi natus amet numquam asperiores itaque non in quas alias molestias. 
-                            Eius ea veniam odio laudantium maiores quod, cumque eligendi aperiam ex possimus id ad blanditiis quasi reprehenderit minus dolor aut, 
-                            excepturi veritatis maxime laborum similique tempore suscipit et! Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa, blanditiis autem, 
-                            tenetur repudiandae consequuntur minima temporibus velit reprehenderit culpa eligendi laudantium voluptate voluptatem deleniti a error! 
-                            Maxime expedita deleniti voluptas magni at. Eum, adipisci, itaque repellendus doloribus provident officia alias incidunt earum reiciendis nam facere distinctio et. 
-                            Perspiciatis, modi voluptate!
-                        </p>
-                    </li>
-                </ul>
-                <ul class="col mt-3 list-unstyled d-flex align-items-center">
-                    <li>
-                        <img src="./sources/istockphoto-1348975688-2048x2048.jpg" class="mx-auto d-block rounded img-fluid" width="500px" alt="ejemploI">
-                    </li>
-                </ul>
-            </div>
-        </div>
+         </div>
     </main>
-
+    <br>
     <footer>
         <div class="container-fluid bg-light p-0">
             <nav class="row navbar navbar-expand-md navbar-light bg-light">
@@ -163,5 +173,8 @@
     <!--JS Bootstrap-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Custom JS -->
+    <!--<script src="js/script.js"></script>-->
 </body>
+
 </html>

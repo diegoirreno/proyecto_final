@@ -1,5 +1,6 @@
 <?php
 
+    include 'config.php';
     include 'database.php';
     $db = new Database();
     $con = $db->conectar();
@@ -66,6 +67,7 @@
         </div>
     </header>
     <main>
+        <a class="nav-link" href="../indexF.php">Volver al menu principal</a>
         <br>
          <div class="container">
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -84,11 +86,12 @@
                                 <div class="card-body">
                                     <h5 class="card-title"><?php echo $row['nombre']; ?></h5>
                                     <p class="card-text text-end"><small class="text-body-secondary">Código: <?php echo $row['codigo']; ?></small>
-                                    <p class="card-text text-end"><small class="text-body-secondary">Precio: <?php echo $row['precio']; ?></small>
+                                    <p class="card-text text-end"><small class="text-body-secondary">Precio: $<?php echo $row['precio']; ?></small>
                                     </p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
-                                         <a href="#" class="btn btn-primary">Detalles</a>
+                                         <a href="detalles_producto.php?codigo=<?php echo $row['codigo']; ?>&token=<?php echo 
+                                         hash_hmac('sha1', $row['codigo'], KEY_TOCKEN); ?>" class="btn btn-primary">Detalles</a>
                                         </div>
                                         <a href="#" class="btn btn-success">Agregar</a>
                                     </div>
