@@ -1,3 +1,27 @@
+<?php
+
+    include 'config.php';
+    include 'database.php';
+    $db = new Database();
+    $con = $db->conectar();
+
+    $productos = isset($_SESSION['carrito']['productos']) ? $_SESSION['carrito']['productos'] : null;
+
+    //print_r($_SESSION);
+
+    $lista_carrito = array();
+
+    if($productos != null) {
+        foreach($productos as $clave => $cantidad){
+        $sql = $con->prepare("SELECT codigo,nombre,precio,descuento,disponibilidad, $cantidad AS cantidad FROM productos WHERE codigo=? AND disponibilidad = 1 AND catalogo = 1");
+        $sql->execute([$clave]);
+        $lista_carrito[] = $sql->fetch(PDO::FETCH_ASSOC); 
+        }
+    }
+    //session_destroy();
+  
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -53,6 +77,7 @@
         </div>
     </header>
     <main>
+    <a class="nav-link" href="../paginas/catalogo_producto.php">Volver al catálogo</a>
         <div class="container-fluid">
             <div class="row text-center my-3">
                 <div class="col">
@@ -63,72 +88,69 @@
             <div class="row mt-3">
                 <!--Col izquierda que contiene la cola de los productos-->
                 <div class="col">
-                        <form action="#" class="table-responsive tb">
+                        <div class="table-responsive tb">
                             <table class="table table-striped table-hover table-bordered m-3">
                                 <thead>
                                     <tr>
                                         <th>Imagen</th>
-                                        <th>Producto</th>
+                                        <th>Código</th>
+                                        <th>Nombre Producto</th>
+                                        <th>Valor unitario</th>
                                         <th>Cantidad</th>
                                         <th>Subtotal</th>
-                                        <th>Eliminar C/U</th>
+                                        <th>Eliminar</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php if($lista_carrito == null){
+                                        echo '<tr><td colspan="7"></td></tr>';
+                                    }else{
+
+                                        $total = 0;
+                                        foreach($lista_carrito as $producto){
+
+                                            $_codigo = $producto['codigo'];
+                                            $nombre = $producto['nombre'];
+                                            $precio = $producto['precio'];
+                                            $descuento = $producto['descuento'];
+                                            $cantidad = $producto['cantidad'];
+                                            $precio_desc = $precio - (($precio*$descuento)/100);
+                                            $subtotal = $cantidad * $precio_desc;
+                                            $total += $subtotal;
+                                        ?>   
                                     <tr>
-                                        <td><img src="../sources/burbuja.png" width="100px" alt="testP1"></td>
                                         <td>
-                                            <h5>Burbujas</h5><br>
-                                            <p>
-                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem ex laborum assumenda. 
-                                                Quas necessitatibus eligendi est, voluptate voluptatem eius quisquam reiciendis vitae voluptatibus odio at pariatur fuga, eveniet excepturi a.
-                                            </p>
+                                        <?php 
+                                        $code = $producto['codigo'];
+                                        $imagen = "../img/productos_novaventa/" . $code . ".png";
+                                        if(!file_exists($imagen)){
+                                        $imagen = "../img/login.png";   
+                                        }
+                                         ?>
+                                        <img src="<?php echo $imagen; ?>" class="img-fluid rounded-start" width="400%">
                                         </td>
-                                        <td>5</td>
-                                        <td>$20000</td>
-                                        <td class="text-center">
-                                            <a href="#" class="btn btn-outline-primary btn-xs">
-                                                -
-                                            </a>
+                                        <td><?php echo $_codigo ?></td>    
+                                        <td><?php echo $nombre ?></td>
+                                        <td><?php echo MONEDA . number_format($precio_desc,0, '.', ','); ?></td>
+                                        <td>
+                                            <input type="number" min="1" max="10" step="1" value="<?php echo $cantidad ?>" 
+                                            size="5" id="cantidad_<?php echo $_codigo; ?>" onchange="">
+                                        </td>
+                                        <td>
+                                            <div id="subtotal_<?php echo $_codigo; ?>" name="subtotal[]"><?php echo MONEDA . 
+                                            number_format($subtotal,0, '.', ','); ?></div>
+                                        </td>
+                                        <td>
+                                            <a href="#" id="eliminar" class="btn btn-warning btn-sm" data-bs-id="<?php echo
+                                            $_codigo; ?>" data-bs-toggle="modal" data-bs-target="eliminaModal">Eliminar</a>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td><img src="../sources/cafe.png" width="100px" alt="testP2"></td>
-                                        <td>
-                                            <h5>Nescafe</h5><br>
-                                            <p>
-                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem ex laborum assumenda. 
-                                                Quas necessitatibus eligendi est, voluptate voluptatem eius quisquam reiciendis vitae voluptatibus odio at pariatur fuga, eveniet excepturi a.
-                                            </p>
-                                        </td>
-                                        <td>2</td>
-                                        <td>$50000</td>
-                                        <td class="text-center">
-                                            <a href="#" class="btn btn-outline-primary btn-xs">
-                                                -
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><img src="../sources/gsc_124405791_3970232_1.avif" width="100px" alt="testP3"></td>
-                                        <td>
-                                            <h5>Colcafe</h5><br>
-                                            <p>
-                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem ex laborum assumenda. 
-                                                Quas necessitatibus eligendi est, voluptate voluptatem eius quisquam reiciendis vitae voluptatibus odio at pariatur fuga, eveniet excepturi a.
-                                            </p></td>
-                                        <td>3</td>
-                                        <td>$30000</td>
-                                        <td class="text-center">
-                                            <a href="#" class="btn btn-outline-primary btn-xs">
-                                                -
-                                            </a>
-                                        </td>
-                                    </tr>
+                                    <?php } ?>
                                 </tbody>
+                             <?php } ?>
                             </table>
-                        </form>
-                </div>
+                         </div>
+                     </div>
                 <!--Col derecha que contiene la descripcion y opciones de la cola pedido-->
                 <div class="col">
                     <form action="#">
@@ -146,7 +168,7 @@
             <!---->
             <div class="row my-3">
                 <div class="col bg-light">
-                    <h6>Total: $####</h6>
+                    <h6>Total: <?php echo MONEDA . number_format($total, 0, '.', ','); ?></h6>
                 </div>
             </div>
         </div>

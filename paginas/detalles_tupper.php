@@ -5,25 +5,25 @@
     $db = new Database();
     $con = $db->conectar();
 
-    $code = isset($_GET['codigo']) ? $_GET['codigo'] : '';
+    $codigo = isset($_GET['codigo']) ? $_GET['codigo'] : '';
     $token = isset($_GET['token']) ? $_GET['token'] : '';
 
-    if($code == '' || $token == ''){
+    if($codigo == '' || $token == ''){
         echo 'Error al procesar la petición';
         exit;
     }else{
 
-        $token_tmp = hash_hmac('sha1', $code, KEY_TOCKEN);
+        $token_tmp = hash_hmac('sha1', $codigo, KEY_TOCKEN);
 
         if($token == $token_tmp){
 
         $sql = $con->prepare("SELECT count(codigo) FROM productos WHERE codigo=? AND disponibilidad = 1 AND catalogo = 2");
-        $sql->execute([$code]);
+        $sql->execute([$codigo]);
         if($sql->fetchColumn() > 0){
 
             $sql = $con->prepare("SELECT codigo,nombre,descripcion,precio,descuento FROM productos WHERE codigo=? AND disponibilidad = 1 
             LIMIT 1");
-            $sql->execute([$code]);
+            $sql->execute([$codigo]);
             $row = $sql->fetch(PDO::FETCH_ASSOC);
             $codigo = mb_convert_case($row['codigo'],MB_CASE_UPPER);
             $nombre = $row['nombre'];
