@@ -69,29 +69,29 @@
                     <!--Carousel-->
                     <div id="carouselC" class="carousel slide">
                         <ol class="carousel-indicators">
-                          <li type="button" data-bs-target="#carouselC" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></li>
+                          <li type="button" data-bs-target="#carouselC" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1" ></li>
                           <li type="button" data-bs-target="#carouselC" data-bs-slide-to="1" aria-label="Slide 2"></li>
-                          <li type="button" data-bs-target="#carouselC" data-bs-slide-to="2" aria-label="Slide 3"></li>
+                          <!--<li type="button" data-bs-target="#carouselC" data-bs-slide-to="2" aria-label="Slide 3"></li>-->
                         </ol>
                         <div class="carousel-inner">
                           <div class="carousel-item active">
                             <a href="paginas/catalogo_producto.php">
-                                <img src="./sources/architecture-3121009_1920.jpg" width="1920" height="400" class="d-block w-100" alt="slide1">
+                                <img src="./sources/LOGO_NOVAVENTA.jpg" width="1920" height="400" class="d-block w-100" alt="slide1">
                             </a>
                           </div>
                           <div class="carousel-item">
-                            <a href="paginas/productos.php">
-                                <img src="./sources/hamburg-8573427_1920.jpg" width="1920" height="400" class="d-block w-100" alt="slide2">
+                            <a href="paginas/catalogo_tupper.php">
+                                <img src="./sources/logo_tupper.jpg" width="1920" height="400" class="d-block w-100" alt="slide2">
                             </a>
-                          </div>
-                          <div class="carousel-item">
-                            <a href="paginas/productos.php">
-                                <img src="./sources/river-6858013_1920.jpg" width="1920" height="400" class="d-block w-100" alt="slide3">
-                            </a>
-                          </div>
+                          <!--</div>-->
+                          <!--<div class="carousel-item">-->
+                            <!--<a href="paginas/productos.php">-->
+                                <!--<img src="./sources/river-6858013_1920.jpg" width="1920" height="400" class="d-block w-100" alt="slide3">-->
+                            <!--</a>-->
+                          <!--</div>-->
                         </div>
                         <a class="carousel-control-prev" type="button" href="#carouselC" data-bs-slide="prev">
-                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span class="carousel-control-prev-icon" aria-hidden="true" ></span>
                           <span class="sr-only">Anterior</span>
                         </a>
                         <a class="carousel-control-next" type="button" href="#carouselC" data-bs-slide="next">

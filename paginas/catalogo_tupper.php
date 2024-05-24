@@ -5,38 +5,10 @@
     $db = new Database();
     $con = $db->conectar();
 
-    $code = isset($_GET['codigo']) ? $_GET['codigo'] : '';
-    $token = isset($_GET['token']) ? $_GET['token'] : '';
+    $sql = $con->prepare("SELECT codigo,nombre,precio FROM productos WHERE disponibilidad = 1 AND catalogo = 2");
+    $sql->execute();
+    $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 
-    if($code == '' || $token == ''){
-        echo 'Error al procesar la petición';
-        exit;
-    }else{
-
-        $token_tmp = hash_hmac('sha1', $code, KEY_TOCKEN);
-
-        if($token == $token_tmp){
-
-        $sql = $con->prepare("SELECT count(codigo) FROM productos WHERE codigo=? AND disponibilidad = 1 AND catalogo = 1");
-        $sql->execute([$code]);
-        if($sql->fetchColumn() > 0){
-
-            $sql = $con->prepare("SELECT codigo,nombre,descripcion,precio,descuento FROM productos WHERE codigo=? AND disponibilidad = 1 
-            LIMIT 1");
-            $sql->execute([$code]);
-            $row = $sql->fetch(PDO::FETCH_ASSOC);
-            $codigo = $row['codigo'];
-            $nombre = mb_convert_case($row['nombre'],MB_CASE_UPPER);
-            $descripcion = $row['descripcion'];
-            $precio = $row['precio'];
-            $descuento = $row['descuento'];
-            $precio_desc = $precio - (($precio*$descuento) / 100);
-        }
-        }else{
-        echo 'Error al procesar la petición';
-        exit;
-        }
-    }
 
 ?>
 <!DOCTYPE html>
@@ -45,7 +17,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo Novaventa</title>
+    <title>Catálogo TupperWare</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" 
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -95,11 +67,14 @@
         </div>
     </header>
     <main>
+        <a class="nav-link" href="../indexF.php">Volver al menu principal</a>
         <br>
          <div class="container">
-                <div class="row">
-                    <div class="col-md-6 order-md-1">
-                    <a class="nav-link" href="../paginas/catalogo_producto.php">Volver al catálogo</a>
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                    <?php foreach ($resultado as $row) { ?>
+                         <div class="col">
+                            <br>
+                            <div class="card shadow-sm">
                                 <?php 
                                 $code = $row['codigo'];
                                 $imagen = "../img/productos_novaventa/" . $code . ".png";
@@ -107,33 +82,24 @@
                                     $imagen = "../img/login.png";   
                                 }
                                 ?>
-                        <img src="<?php echo $imagen; ?>" class="img-fluid rounded-start" width="100%">
-                    </div>
-                    <div class="col-md-6 order-md-2">
-                        <h2><?php echo $nombre; ?></h2>
-
-                        <?php if($descuento > 0) { ?>
-                            <p><del><?php echo MONEDA . number_format($precio, 0, '.', ',');  ?></del></p>
-                            <h2>
-                            <?php echo MONEDA . number_format($precio_desc, 0, '.', ','); ?>
-                            <small class="text-success"><?php echo $descuento; ?>% descuento</small>
-                            </h2>
-
-                        <?php }else{ ?>
-        
-                            <h2><?php echo MONEDA . number_format($precio, 0, '.', ','); ?></h2>
-
-                        <?php } ?>
-
-                        <h3>Código: <?php echo $codigo; ?></h3>
-                        <p class="lead">
-                            Descripción: <?php echo mb_convert_case($descripcion,MB_CASE_LOWER); ?>
-                        </p>  
-                        <div class="d-grid gap-3 col-10 mx-auto">
-                            <button class="btn btn-outline-primary" type="button">Agregar al carrito</button>
-                        </div>  
-                    </div>
-                </div>
+                                <img src="<?php echo $imagen; ?>" class="img-fluid rounded-start" width="100%">
+                                <div class="card-body">
+                                    <h5 class="card-title"><?php echo mb_convert_case($row['nombre'],MB_CASE_UPPER); ?></h5>
+                                    <p class="card-text text-end"><small class="text-body-secondary">Código: <?php echo mb_convert_case($row['codigo'],MB_CASE_UPPER); ?></small>
+                                    <p class="card-text text-end"><small class="text-body-secondary">Precio: $<?php echo $row['precio']; ?></small>
+                                    </p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                         <a href="detalles_tupper.php?codigo=<?php echo $row['codigo']; ?>&token=<?php echo 
+                                         hash_hmac('sha1', $row['codigo'], KEY_TOCKEN); ?>" class="btn btn-primary">Detalles</a>
+                                        </div>
+                                        <a href="#" class="btn btn-success">Agregar</a>
+                                    </div>
+                                </div>
+                             </div>
+                        </div>
+                    <?php } ?>
+             </div>      
          </div>
     </main>
     <br>

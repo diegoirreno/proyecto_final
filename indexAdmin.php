@@ -27,6 +27,7 @@
         </div>
     </header>
     <main class="m-0">
+    <a class="nav-link" href="../proyecto_final/indexF.php">Volver al menu principal</a>
             <div class="contenedor__todo">
                 <div class="caja__trasera">
                     <div class="caja__trasera-login">

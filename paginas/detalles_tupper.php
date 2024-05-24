@@ -17,7 +17,7 @@
 
         if($token == $token_tmp){
 
-        $sql = $con->prepare("SELECT count(codigo) FROM productos WHERE codigo=? AND disponibilidad = 1 AND catalogo = 1");
+        $sql = $con->prepare("SELECT count(codigo) FROM productos WHERE codigo=? AND disponibilidad = 1 AND catalogo = 2");
         $sql->execute([$code]);
         if($sql->fetchColumn() > 0){
 
@@ -25,8 +25,8 @@
             LIMIT 1");
             $sql->execute([$code]);
             $row = $sql->fetch(PDO::FETCH_ASSOC);
-            $codigo = $row['codigo'];
-            $nombre = mb_convert_case($row['nombre'],MB_CASE_UPPER);
+            $codigo = mb_convert_case($row['codigo'],MB_CASE_UPPER);
+            $nombre = $row['nombre'];
             $descripcion = $row['descripcion'];
             $precio = $row['precio'];
             $descuento = $row['descuento'];
@@ -99,7 +99,7 @@
          <div class="container">
                 <div class="row">
                     <div class="col-md-6 order-md-1">
-                    <a class="nav-link" href="../paginas/catalogo_producto.php">Volver al catálogo</a>
+                    <a class="nav-link" href="../paginas/catalogo_tupper.php">Volver al catálogo</a>
                                 <?php 
                                 $code = $row['codigo'];
                                 $imagen = "../img/productos_novaventa/" . $code . ".png";
@@ -110,7 +110,7 @@
                         <img src="<?php echo $imagen; ?>" class="img-fluid rounded-start" width="100%">
                     </div>
                     <div class="col-md-6 order-md-2">
-                        <h2><?php echo $nombre; ?></h2>
+                        <h2><?php echo mb_convert_case($nombre,MB_CASE_UPPER); ?></h2>
 
                         <?php if($descuento > 0) { ?>
                             <p><del><?php echo MONEDA . number_format($precio, 0, '.', ',');  ?></del></p>
