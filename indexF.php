@@ -10,7 +10,7 @@
 
     <title>Distribuciones Irreño</title>
 </head>
-<body class="container-fluid">
+<body class="container-fluid p-0">
     <header>
         <div class="container-fluid p-0">
             <nav class="row navbar navbar-expand-md navbar-light bg-light border-bottom border-primary">
@@ -86,7 +86,7 @@
                             </a>
                           </div>
                           <div class="carousel-item">
-                            <a href="paginas/productos.php">
+                            <a href="paginas/catalogo_tupper.php">
                                 <img src="./sources/Catal2.jpg" class="d-block w-100 img-fluid" alt="slide2">
                             </a>
                           </div>
@@ -104,7 +104,7 @@
                 </div>
             </div>
             <div class="row bg-dark text-light">
-                <ul class="col mt-3 list-unstyled">
+                <ul class="col ml-3 mt-3 list-unstyled">
                     <li>
                         <h4>¿Quiénes somos?</h4>
                     </li>
