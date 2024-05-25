@@ -33,7 +33,7 @@
      <link rel="stylesheet" href="../css/index.css">
     <title>Cola del pedido</title>
 </head>
-<body class="container-fluid">  
+<body class="container-fluid p-0">  
     <header>
         <div class="container-fluid p-0">
             <nav class="row navbar navbar-expand-md navbar-light bg-light border-bottom border-primary">
@@ -77,8 +77,15 @@
         </div>
     </header>
     <main>
-    <a class="nav-link" href="../paginas/catalogo_producto.php">Volver al catálogo</a>
-        <div class="container-fluid">
+        <div class="container-fluid p-0">
+            <div class="row">
+                <nav class="col" style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="../paginas/catalogo_producto.php">Catálogo</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Cola del pedido</li>
+                    </ol>
+                </nav>
+            </div>
             <div class="row text-center my-3">
                 <div class="col">
                     <h4>Productos en cola</h4>
@@ -87,7 +94,7 @@
             <!--Row contenedora del Hero-->
             <div class="row mt-3">
                 <!--Col izquierda que contiene la cola de los productos-->
-                <div class="col">
+                <div class="col-8">
                         <div class="table-responsive tb">
                             <table class="table table-striped table-hover table-bordered m-3">
                                 <thead>
@@ -127,7 +134,7 @@
                                         $imagen = "../img/login.png";   
                                         }
                                          ?>
-                                        <img src="<?php echo $imagen; ?>" class="img-fluid rounded-start" width="400%">
+                                        <img src="<?php echo $imagen; ?>" class="img-fluid rounded-start" width="200px">
                                         </td>
                                         <td><?php echo $_codigo ?></td>    
                                         <td><?php echo $nombre ?></td>
@@ -152,12 +159,12 @@
                          </div>
                      </div>
                 <!--Col derecha que contiene la descripcion y opciones de la cola pedido-->
-                <div class="col">
+                <div class="col-4">
                     <form action="#">
                         <h5>Confirmación del pedido</h5>
                         <p>Para confirmar su pedido por favor digite su número de cedula, recuerde que debe estar previamente registrado para poder continuar.</p>
                         <label for="di">Ingrese su documento de identidad</label><br>
-                        <input type="number" class="form-control-xs" id="di" min="0" name="documentoI">
+                        <input type="text" class="form-control-xs" id="di" name="documentoI">
                         <button type="submit" class="btn btn-outline-primary">
                             Confirmar
                         </button><br>
