@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../css/styles.css">
     <title>Registro de usuario</title>
 </head>
-<body class="container-fluid">
+<body class="container-fluid p-0">
     <header>
         <div class="container-fluid p-0">
             <nav class="row navbar navbar-expand-md navbar-light bg-light border-bottom border-primary">
@@ -56,8 +56,16 @@
         </div>
     </header>
     <main>
-        <div class="container">
-            <div class="abs-center">
+        <div class="container-fluid p-0">
+            <div class="row">
+                <nav class="col" style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="../indexF.php">Menú principal</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Registro de usuario</li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="row abs-center">
                 <form action="../paginas/registro_cliente.php" method="POST" class="border p-3 form">
                     <div class="text-center mb-4">
                         <img src="../sources/login.png" alt="login" width="150">
@@ -90,7 +98,6 @@
                     <div class="text-center mt-3">
                         <!--<input class="btn btn-outline-primary"class="form-control border border-dark border-1">-->
                         <button class="btn btn-outline-primary" >Registrarse</button>
-                        <a class="nav-link" href="../indexF.php">Volver</a>
                         <a class="nav-link" href="../indexAdmin.php">Registro administrador</a>
                        <!-- <a href="../indexV4.html" class="btn btn-outline-primary">
                             <button type="submit" class="btn btn-outline-primary">Aceptar</button>
