@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" 
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
-<body class="container-fluid">
+<body class="container-fluid p-0">
     <header>
         <div class="container-fluid p-0">
             <nav class="row navbar navbar-expand-md navbar-light bg-light border-bottom border-primary">
@@ -68,43 +68,49 @@
                 </div>
             </nav>
         </div>
-    </header>
+    </header> 
     <main>
-        <a class="nav-link" href="../indexF.php">Volver al menu principal</a>
-        <br>
-         <div class="container">
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                    <?php foreach ($resultado as $row) { ?>
-                         <div class="col">
-                            <br>
-                            <div class="card shadow-sm">
-                                <?php 
-                                $code = $row['codigo'];
-                                $imagen = "../img/productos_novaventa/" . $code . ".png";
-                                if(!file_exists($imagen)){
-                                    $imagen = "../img/login.png";   
-                                }
-                                ?>
-                                <img src="<?php echo $imagen; ?>" class="img-fluid rounded-start" width="100%">
-                                <div class="card-body">
-                                    <h5 class="card-title"><?php echo mb_convert_case($row['nombre'],MB_CASE_UPPER); ?></h5>
-                                    <p class="card-text text-end"><small class="text-body-secondary">Código: <?php echo $row['codigo']; ?></small>
-                                    <p class="card-text text-end"><small class="text-body-secondary">Precio: $<?php echo $row['precio']; ?></small>
-                                    </p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="btn-group">
-                                         <a href="detalles_producto.php?codigo=<?php echo $row['codigo']; ?>&token=<?php echo 
-                                         hash_hmac('sha1', $row['codigo'], KEY_TOCKEN); ?>" class="btn btn-primary">Detalles</a>
-                                        </div>
-                                        <button class="btn btn-success" type="button" onclick="addProducto(<?php echo $row['codigo']; ?>,
-                                        '<?php echo hash_hmac('sha1', $row['codigo'], KEY_TOCKEN); ?>')">Agregar</button>
+        <div class="container-fluid p-0">
+            <div class="row">
+                <nav class="col" style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="../indexF.php">Menú principal</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Catálogo</li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                <?php foreach ($resultado as $row) { ?>
+                        <div class="col">
+                        <br>
+                        <div class="card shadow-sm">
+                            <?php 
+                            $code = $row['codigo'];
+                            $imagen = "../img/productos_novaventa/" . $code . ".png";
+                            if(!file_exists($imagen)){
+                                $imagen = "../img/login.png";   
+                            }
+                            ?>
+                            <img src="<?php echo $imagen; ?>" class="img-fluid rounded-start" width="100%">
+                            <div class="card-body">
+                                <h5 class="card-title"><?php echo mb_convert_case($row['nombre'],MB_CASE_UPPER); ?></h5>
+                                <p class="card-text text-end"><small class="text-body-secondary">Código: <?php echo $row['codigo']; ?></small>
+                                <p class="card-text text-end"><small class="text-body-secondary">Precio: $<?php echo $row['precio']; ?></small>
+                                </p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <a href="detalles_producto.php?codigo=<?php echo $row['codigo']; ?>&token=<?php echo 
+                                        hash_hmac('sha1', $row['codigo'], KEY_TOCKEN); ?>" class="btn btn-primary">Detalles</a>
                                     </div>
+                                    <button class="btn btn-success" type="button" onclick="addProducto(<?php echo $row['codigo']; ?>,
+                                    '<?php echo hash_hmac('sha1', $row['codigo'], KEY_TOCKEN); ?>')">Agregar</button>
                                 </div>
-                             </div>
-                        </div>
-                    <?php } ?>
-             </div>      
-         </div>
+                            </div>
+                            </div>
+                    </div>
+                <?php } ?>
+            </div>      
+        </div>
     </main>
     <br>
     <footer>
