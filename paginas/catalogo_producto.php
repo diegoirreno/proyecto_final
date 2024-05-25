@@ -146,7 +146,7 @@
     <!-- Custom JS -->
     <!--<script src="js/script.js"></script>-->
     <script>
-        function addProducto(codigo, token){
+        function addProducto(codigo, token) {
             let url = 'carrito.php'
             let formData = new FormData()
             formData.append('codigo', codigo)
@@ -157,8 +157,8 @@
                 body: formData,
                 mode: 'cors'
             }).then(response => response.json())
-            .then(data =>{
-                if(data.ok){
+            .then(data => {
+                if (data.ok) {
                     let elemento = document.getElementById("num_cart")
                     elemento.innerHTML = data.numero
                 }
