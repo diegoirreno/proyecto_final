@@ -5,12 +5,13 @@
     background-color: dodgerblue;
 }
 
+/* Elimina el indicador para aumentar un valor en el input number
 input[type='number']::-webkit-inner-spin-button,
 input[type='number']::-webkit-outer-spin-button{
     -webkit-appearance: none;
     margin: 0;
 }
-
+*/
 .tb {
     overflow-y:auto;
     display: flex;
