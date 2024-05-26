@@ -1,26 +1,26 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--Link CSS Bootstrap-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" 
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
+    crossorigin="anonymous">
      <link rel="stylesheet" href="./css/index.css">
     <title>Administración de BD</title>
 </head>
 <body>
     <header>
         <div class="container-fluid p-0">
-            <nav class="row navbar navbar-expand-md navbar-light bg-light border-bottom border-primary">
+            <nav class="row navbar navbar-expand-md navbar-light bg-light border-bottom border-primary p-3">
                 <div class="col-3"> 
                     <a href="../indexF.php" class="navbar-brand">Distribuciones Irreño</a>
-                    <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#Menu">
-                        <span class="navbar-toggler-icon">
-                        </span>
-                    </button>
-                </div>     
+                </div>  
+                <div class="col-9 d-flex justify-content-end">
+                    <a href="../paginas/cerrar_sesion.php" class="btn btn-outline-primary">
+                        Cerrar sesión
+                    </a>
+                </div>   
             </nav>
             <div class="row">
                 <div class="col text-center my-3 bg-dark text-light">
@@ -31,103 +31,361 @@
     </header>
     <main>
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-3">
-                    <nav class="mx-2">
-                        <p class="d-inline-flex">
-                            <!--Boton cerrar sesion-->
-                            <a href="../paginas/cerrar_sesion.php">Cerrar sesión</a>
-                            <a class="btn btn-primary form-control my-3" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                Bases de datos
-                            </a>
-                            </p>
-                            <div class="collapse" id="collapseExample">
-                                <div class="card card-body">
-                                    <ul>
-                                        <li>
-                                            BS_DistrIrreno
-                                            <ul>
-                                                <li><a href="#">Cliente</a></li>
-                                                <li><a href="#">Administrador</a></li>
-                                                <li><a href="#">Prefactura</a></li>
-                                                <li><a href="#">Detalle Prefactura</a></li>
-                                                <li><a href="#">Producto</a></li>
-                                                <li><a href="#">Catálogo</a></li>
-                                                <li><a href="#">Campaña</a></li>
-                                            </ul>
-                                        </li>
-                                    
-                                    </ul>
+            <nav class="row m-2">
+                <!--Modal Productos-->
+                <div class="col-4 d-flex justify-content-center">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        Productos
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-fullscreen">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Productos</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <h5>Registrar producto</h5>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <form action="#" class="table-responsive tb">
+                                                            <div class="row">
+                                                                <table class="table table-striped table-hover table-bordered m-3">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Código</th>
+                                                                            <th>Nombre</th>
+                                                                            <th>Descripción</th>
+                                                                            <th>Disponibilidad</th>
+                                                                            <th>Precio</th>
+                                                                            <th>Descuento</th>
+                                                                        </tr>  
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td><input type="text" placeholder="Código del producto"></td>
+                                                                            <td><input type="text" placeholder="Nombre del producto"></td>
+                                                                            <td><input type="text" placeholder="Descripción del producto"></td>
+                                                                            <td><input type="number" min="0" placeholder="0" name="" id=""></td>
+                                                                            <td><input type="number" min="0" placeholder="Precio" name="" id=""></td>
+                                                                            <td><input type="number" min="0" placeholder="0" name="" id=""></td>
+                                                                        </tr>
+                                                                    </tbody> 
+                                                                </table>
+                                                            </div>
+                                                        <div class="row">
+                                                                <div class="col d-flex justify-content-center">
+                                                                    <button class="btn btn-outline-primary">
+                                                                        Agregar producto
+                                                                    </button>
+                                                                </div>                                                                   
+                                                        </div>                                                              
+                                                        </form>                                                           
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                           
+                                        <div class="row py-3">
+                                            <h5>Productos registrados</h5>
+                                        </div>
+                                        <!--Tabla productos registrados-->
+                                        <div class="row">
+                                            <div class="col">
+                                                <form action="#" class="table-responsive tb">
+                                                    <nav class="row">
+                                                        <div class="col ml-3">
+                                                            <input class="form-control ms-3" type="search" placeholder="Buscar producto..." aria-label="search">
+                                                        </div>
+                                                        <div class="col">
+                                                            <button class="btn btn-outline-primary btn-xs" type="submit">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                                                                </svg>
+                                                            </button>
+                                                        </div>
+                                                    </nav>
+                                                    <table class="table table-striped table-hover table-bordered m-3">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Código</th>
+                                                                <th>Nombre</th>
+                                                                <th>Descripción</th>
+                                                                <th>Disponibilidad</th>
+                                                                <th>precio</th>
+                                                                <th>Descuento</th>
+                                                                <th>Eliminar</th>
+                                                            </tr>                   
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>31414</td>
+                                                                <td>Galletas</td>
+                                                                <td>Galletas oreo de 100gr</td>
+                                                                <td>4</td>
+                                                                <td>$4000</td>
+                                                                <td>0</td>
+                                                                <td>
+                                                                    <input type="number">
+                                                                    <button class="btn btn-outline-primary">
+                                                                        Eliminar
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody> 
+                                                    </table>
+                                                </form>                                         
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">                                       
+                                
                                 </div>
                             </div>
-                    </nav>
-                </div>
-                <div class="col-9">
-                    <div class="row">
-                        <div class="col my-3">
-                            <h6>Tabla: Producto</h6>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-
-                            <form action="#" class="table-responsive tb">
-                                <nav class="row">
-                                    <div class="col ml-3">
-                                        <input class="form-control me-2" type="search" placeholder="Buscar elemento..." aria-label="search">
-                                    </div>
-                                    <div class="col">
-                                        <button class="btn btn-outline-primary btn-xs" type="submit">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </nav>
-                                <table class="table table-striped table-hover table-bordered m-3">
-                                    <thead>
-                                        <tr>
-                                            <th></th>
-                                            <th>ID</th>
-                                            <th>Nombre Producto</th>
-                                            <th>Código</th>
-                                            <th>Precio</th>
-                                            <th>Eliminar</th>
-                                        </tr>
-                                        <tr>
-                                            <th>
-                                                <button class="btn btn-outline-primary" type="submit">
-                                                    ADD +
-                                                </button>
-                                            </th>
-                                            <th>1</th>
-                                            <th><input type="text" placeholder="Nombre del producto"></th>
-                                            <th><input type="number" min="0" placeholder="1436521"></th>
-                                            <th><input type="number" min="0" placeholder="$####" name="" id=""></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td class="text-center">
-                                                <a href="#" class="btn btn-outline-primary btn-xs">
-                                                    -
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </form>
-                            
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+                <!--Modal Clientes-->
+                <div class="col-4 d-flex justify-content-center">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
+                        Clientes
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-fullscreen">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Clientes</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <h5>Registrar Cliente</h5>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <form action="#" class="table-responsive tb">
+                                                            <div class="row">
+                                                                <table class="table table-striped table-hover table-bordered m-3">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Cedula</th>
+                                                                            <th>Nombre</th>
+                                                                            <th>Apellido</th>
+                                                                            <th>Coreo-e</th>
+                                                                            <th>Teléfono</th>
+                                                                            <th>Dirección</th>
+                                                                        </tr>  
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td><input type="text" placeholder="#Cedula"></td>
+                                                                            <td><input type="text" placeholder="Nombre"></td>
+                                                                            <td><input type="text" placeholder="Apellido"></td>
+                                                                            <td><input type="text" placeholder="Correo-e" name="" id=""></td>
+                                                                            <td><input type="text" placeholder="Teléfono" name="" id=""></td>
+                                                                            <td><input type="text" placeholder="Dirección"></td>
+                                                                        </tr>
+                                                                    </tbody> 
+                                                                </table>
+                                                            </div>
+                                                        <div class="row">
+                                                                <div class="col d-flex justify-content-center">
+                                                                    <button class="btn btn-outline-primary">
+                                                                        Agregar cliente
+                                                                    </button>
+                                                                </div>                                                                   
+                                                        </div>                                                              
+                                                        </form>                                                           
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row py-3">
+                                            <h5>Clientes registrados</h5>
+                                        </div>
+                                        <!--Tabla clientes registrados-->
+                                        <div class="row">
+                                            <div class="col">
+                                                <form action="#" class="table-responsive tb">
+                                                    <nav class="row">
+                                                        <div class="col ml-3">
+                                                            <input class="form-control ms-3" type="search" placeholder="Buscar cliente..." aria-label="search">
+                                                        </div>
+                                                        <div class="col">
+                                                            <button class="btn btn-outline-primary btn-xs" type="submit">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                                                                </svg>
+                                                            </button>
+                                                        </div>
+                                                    </nav>
+                                                    <table class="table table-striped table-hover table-bordered m-3">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Cedula</th>
+                                                                <th>Nombre</th>
+                                                                <th>Apellido</th>
+                                                                <th>Correo-e</th>
+                                                                <th>Teléfono</th>
+                                                                <th>Dirección</th>                                                               
+                                                            </tr>                   
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>31414</td>
+                                                                <td>Galletas</td>
+                                                                <td>Galletas oreo de 100gr</td>
+                                                                <td>4</td>
+                                                                <td>$4000</td>
+                                                                <td>0</td>
+                                                                <td>
+                                                                    <button class="btn btn-outline-primary">
+                                                                        Eliminar
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody> 
+                                                    </table>
+                                                </form>                                         
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">                                       
+                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <!--Modal Administradores-->
+                <div class="col-4 d-flex justify-content-center">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop3">
+                        Administradores
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="staticBackdrop3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-fullscreen">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Administradores</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <h5>Registrar Administrador</h5>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <form action="#" class="table-responsive tb">
+                                                            <div class="row">
+                                                                <table class="table table-striped table-hover table-bordered m-3">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Cedula</th>
+                                                                            <th>Nombre</th>
+                                                                            <th>Apellido</th>
+                                                                            <th>Contraseña</th>
+                                                                            <th>Código</th>
+                                                                        </tr>  
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td><input type="text" placeholder="Cedula"></td>
+                                                                            <td><input type="text" placeholder="Nombre"></td>
+                                                                            <td><input type="text" placeholder="Apellido"></td>
+                                                                            <td><input type="password" name="" id=""></td>
+                                                                            <td><input type="text" placeholder="Código" name="" id=""></td>
+                                                                        </tr>
+                                                                    </tbody> 
+                                                                </table>
+                                                            </div>
+                                                        <div class="row">
+                                                                <div class="col d-flex justify-content-center">
+                                                                    <button class="btn btn-outline-primary">
+                                                                        Agregar administrador
+                                                                    </button>
+                                                                </div>                                                                   
+                                                        </div>                                                              
+                                                        </form>                                                           
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row py-3">
+                                            <h5>Administadores registrados</h5>
+                                        </div>
+                                        <!--Tabla administradores registrados-->
+                                        <div class="row">
+                                            <div class="col">
+                                                <form action="#" class="table-responsive tb">
+                                                    <nav class="row">
+                                                        <div class="col ml-3">
+                                                            <input class="form-control ms-3" type="search" placeholder="Buscar administrador..." aria-label="search">
+                                                        </div>
+                                                        <div class="col">
+                                                            <button class="btn btn-outline-primary btn-xs" type="submit">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                                                                </svg>
+                                                            </button>
+                                                        </div>
+                                                    </nav>
+                                                    <table class="table table-striped table-hover table-bordered m-3">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Cedula</th>
+                                                                <th>Nombre</th>
+                                                                <th>Apellido</th>
+                                                                <th>Contraseña</th>
+                                                                <th>Código</th>                                                             
+                                                            </tr>                   
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>31414</td>
+                                                                <td>Galletas</td>
+                                                                <td>Galletas oreo de 100gr</td>
+                                                                <td>4</td>
+                                                                <td>$4000</td>
+                                                                <td>
+                                                                    <button class="btn btn-outline-primary">
+                                                                        Eliminar
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody> 
+                                                    </table>
+                                                </form>                                         
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">                                       
+                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>                    
+        </div>   
     </main>
     <footer>
         <div class="container-fluid bg-light p-0">
