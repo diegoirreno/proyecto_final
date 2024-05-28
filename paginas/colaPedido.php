@@ -110,7 +110,9 @@
                                 </thead>
                                 <tbody>
                                     <?php if($lista_carrito == null){
-                                        echo '<tr><td colspan="7"></td></tr>';
+                                        echo '<tr>
+                                            <td colspan="7"><center>Lista vacia, no has agregado productos</center></td>
+                                            </tr>'; 
                                     }else{
 
                                         $total = 0;
@@ -175,7 +177,13 @@
             <!---->
             <div class="row my-3">
                 <div class="col bg-light">
-                    <h6>Total: <?php echo MONEDA . number_format($total, 0, '.', ','); ?></h6>
+                    <h6>Total: <?php 
+                    if(empty($total)){
+                        echo '$0';
+                    }else {
+                        echo MONEDA . number_format($total, 0, '.', ','); 
+                    }
+                    ?></h6>
                 </div>
             </div>
         </div>
