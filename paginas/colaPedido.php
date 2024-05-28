@@ -1,7 +1,8 @@
 <?php
 
     include 'config.php';
-    include 'database.php';
+    include 'database.php'; 
+
     $db = new Database();
     $con = $db->conectar();
 
@@ -12,6 +13,8 @@
     $lista_carrito = array();
 
     if($productos != null) {
+
+
         foreach($productos as $clave => $cantidad){
         $sql = $con->prepare("SELECT codigo,nombre,precio,descuento,disponibilidad, $cantidad AS cantidad FROM productos WHERE codigo=? AND disponibilidad = 1");
         $sql->execute([$clave]);
@@ -165,13 +168,17 @@
                     <form action="#">
                         <h5>Confirmación del pedido</h5>
                         <p>Para confirmar su pedido por favor digite su número de cedula, recuerde que debe estar previamente registrado para poder continuar.</p>
-                        <label for="di">Ingrese su documento de identidad</label><br>
-                        <input type="text" class="form-control-xs" id="di" name="documentoI">
-                        <button type="submit" class="btn btn-outline-primary">
-                            Confirmar
-                        </button><br>
+                        <label for="id">Documento de identidad :</label>
+                        <input type="text" name="cedula_vali" class="form-control border border-dark border-1">
+                        <br>
+                        <?php if($lista_carrito != null) { ?>
+                        <div class="btn-group">
+                        <a href="../paginas/prefactura.php" class="btn btn-primary btn-lg">Confirmar</a>
+                         </div>
+                         <?php } ?>
+                        
+                         <br>
                     </form>
-                    <a href="./registrar_cli.php" class="btn p-0">Registrarse</a>
                 </div>
             </div>
             <!---->

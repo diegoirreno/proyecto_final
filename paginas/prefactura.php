@@ -1,17 +1,48 @@
+<?php
 
+    include 'config.php';
+    include 'database.php';
+
+    $db = new Database();
+    $con = $db->conectar();
+
+    $productos = isset($_SESSION['carrito']['productos']) ? $_SESSION['carrito']['productos'] : null;
+
+    //print_r($_SESSION);
+
+    $lista_carrito = array();
+
+    if($productos != null) {
+
+        foreach($productos as $clave => $cantidad){
+        $sql = $con->prepare("SELECT codigo,nombre,precio,descuento,disponibilidad, $cantidad AS cantidad FROM productos WHERE codigo=? AND disponibilidad = 1");
+        $sql->execute([$clave]);
+        $lista_carrito[] = $sql->fetch(PDO::FETCH_ASSOC); 
+        }
+    }else{
+        echo'
+        <script>
+            alert("No hay productos registrados");
+            window.location = "../indexF.php"
+        </script>
+    ';
+    }
+    //session_destroy();
+  
+
+?>
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <!--Link CSS Bootstrap-->
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" 
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/styles.css">
-    <title>Registro de usuario</title>
+     <link rel="stylesheet" href="../css/index.css">
+    <title>Cola del pedido</title>
 </head>
-<body class="container-fluid p-0">
+<body class="container-fluid p-0">  
     <header>
         <div class="container-fluid p-0">
             <nav class="row navbar navbar-expand-md navbar-light bg-light border-bottom border-primary">
@@ -28,28 +59,8 @@
 
                 <div id="Menu" class="col collapse navbar-collapse">
                     <ul class="col navbar-nav ms-3">
-                        <div class="col-8 col-sm-6 p-0">
-                            <form action="#" class="d-flex" role="search">
-                                <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="search">
-                                <button class="btn btn-outline-primary btn-xs" type="submit">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-                                        </svg>
-                                </button>
-                            </form>
-                        </div>
                         <div class="col-4 col-sm-6 p-0">
-                            <li class="nav-item d-flex align-items-center"> 
-                                <a class="nav-link" href="./registrar_cli.php">Registrarse</a>
-                                <a type="button" href="./colaPedido.php" class="btn btn-outline-primary">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
-                                        <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 
-                                        3H.5a.5.5 0 0 1-.5-.5M3.14 5l.5 2H5V5zM6 5v2h2V5zm3 0v2h2V5zm3 0v2h1.36l.5-2zm1.11 3H12v2h.61zM11 8H9v2h2zM8 8H6v2h2zM5 8H3.89l.5 2H5zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0m9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0"/>
-                                        </svg>
-                                </a>
-                            </li> 
                         </div>
-
                     </ul>
                 </div>
             </nav>
@@ -60,51 +71,78 @@
             <div class="row">
                 <nav class="col" style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="../indexF.php">Menú principal</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Registro de usuario</li>
+                        <li class="breadcrumb-item"><a href="../paginas/colaPedido.php">Cola del pedido</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Prefactura</li>
                     </ol>
                 </nav>
             </div>
-            <div class="row abs-center">
-                <form action="../paginas/registro_cliente.php" method="POST" class="border p-3 form">
-                    <div class="text-center mb-4">
-                        <img src="../sources/login.png" alt="login" width="150">
-                        <h2>Registro de usuario</h2>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label for="id">Documento de identidad</label>
-                        <input type="text" name="document" class="form-control border border-dark border-1">
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label for="name">Nombre</label>
-                        <input type="text" name="name" class="form-control border border-dark border-1 ">
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label for="lastname">Apellidos</label>
-                        <input type="text" name="lastname" class="form-control border border-dark border-1">
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label for="email">Correo electrónico</label>
-                        <input type="email" name="email" class="form-control border border-dark border-1">
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label for="cellphone">Telefono</label>
-                        <input type="tel" name="cellphone" class="form-control border border-dark border-1">
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label for="address">Direccion</label>
-                        <input type="text" name="address" id="address" class="form-control border border-dark border-1">
-                    </div>
-                    <div class="text-center mt-3">
-                        <!--<input class="btn btn-outline-primary"class="form-control border border-dark border-1">-->
-                        <button class="btn btn-outline-primary" >Registrarse</button>
-                       <!-- <a href="../indexV4.html" class="btn btn-outline-primary">
-                            <button type="submit" class="btn btn-outline-primary">Aceptar</button>
-                            Aceptar
-                        </a>-->
-                    </div>
-                </form>
-    
+            <div class="row text-center my-3">
+                <div class="col">
+                    <h4>Prefactura</h4>
+                </div>
+            </div>
+            <!--Row contenedora del Hero-->
+            <div class="row mt-3">
+                <!--Col izquierda que contiene la cola de los productos-->
+                <div class="col" >
+                        <div class="table-responsive tb ">
+                            <table class="table table-striped table-hover table-bordered m-3">
+                                <thead>
+                                    <tr>
+                                        <th>Código</th>
+                                        <th>Nombre Producto</th>
+                                        <th>Valor unitario</th>
+                                        <th>Cantidad</th>
+                                        <th>Subtotal</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php if($lista_carrito == null){
+                                        echo '<tr>
+                                            <td colspan="5"><center>Lista vacia, no has agregado productos</center></td>
+                                            </tr>'; 
+                                    }else{
+
+                                        $total = 0;
+                                        foreach($lista_carrito as $producto){
+
+                                            $_codigo = $producto['codigo'];
+                                            $nombre = $producto['nombre'];
+                                            $precio = $producto['precio'];
+                                            $descuento = $producto['descuento'];
+                                            $cantidad = $producto['cantidad'];
+                                            $precio_desc = $precio - (($precio*$descuento)/100);
+                                            $subtotal = $cantidad * $precio_desc;
+                                            $total += $subtotal;
+                                        ?>   
+                                    <tr>
+                                        <td><?php echo $_codigo ?></td>    
+                                        <td><?php echo $nombre ?></td>
+                                        <td><?php echo MONEDA . number_format($precio_desc,0, '.', ','); ?></td>
+                                        <td><?php echo $cantidad ?></td>
+                                        <td>
+                                            <div id="subtotal_<?php echo $_codigo; ?>" name="subtotal[]"><?php echo MONEDA . 
+                                            number_format($subtotal,0, '.', ','); ?></div>
+                                        </td>
+                                    </tr>
+                                    <?php } ?>
+                                </tbody>
+                             <?php } ?>
+                            </table>
+                         </div>
+                     </div>
+            </div>
+            <!---->
+            <div class="row my-3">
+                <div class="col bg-light">
+                    <h6>Total: <?php 
+                    if(empty($total)){
+                        echo '$0';
+                    }else {
+                        echo MONEDA . number_format($total, 0, '.', ','); 
+                    }
+                    ?></h6>
+                </div>
             </div>
         </div>
     </main>
@@ -140,11 +178,9 @@
                 </ul>
             </nav>
         </div>
-    </footer>    
-    
+    </footer>
     <!--JS Bootstrap-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
-
 </html>

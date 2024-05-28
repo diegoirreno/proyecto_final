@@ -2,11 +2,11 @@
 
     include 'conexion_db.php';
 
-    $cedula_admin = $_POST['cedu_admin'];
-    $nombre_admin = $_POST['name_admin'];
-    $apellido_admin = $_POST['lastname_admin'];
-    $contrasena_admin = $_POST['password_admin'];
-    $codigo_admin = $_POST['code_admin'];
+    $cedula_admin = trim($_POST['cedu_admin']);
+    $nombre_admin = trim($_POST['name_admin']);
+    $apellido_admin = trim($_POST['lastname_admin']);
+    $contrasena_admin = trim($_POST['password_admin']);
+    $codigo_admin = trim($_POST['code_admin']);
     
     //Verificar que el codigo del administrador sea correcto
     /*$validar_code = "SELECT * FROM administrador WHERE codigo_admin = '$codigo_admin'";

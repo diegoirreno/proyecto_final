@@ -2,12 +2,12 @@
 
     include 'conexion_db.php';
 
-    $cedula = $_POST['document'];
-    $nombre = $_POST['name'];
-    $apellido = $_POST['lastname'];
-    $correo = $_POST['email'];
-    $telefono = $_POST['cellphone'];
-    $direccion = $_POST['address'];
+    $cedula = trim($_POST['document']);
+    $nombre = trim($_POST['name']);
+    $apellido = trim($_POST['lastname']);
+    $correo = trim($_POST['email']);
+    $telefono = trim($_POST['cellphone']);
+    $direccion = trim($_POST['address']);
 
     //Verificar que el cliente ya esta registrado
     
