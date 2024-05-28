@@ -130,9 +130,13 @@
                         <p class="lead">
                             Descripción: <?php echo mb_convert_case($descripcion,MB_CASE_LOWER); ?>
                         </p>  
+                        <div class="col-3 my-3">
+                            Cantidad: <input class="form-control" id="cantidad" name="cantidad" type="number" 
+                            min="1" max="10" value="1">
+                        </div>
                         <div class="d-grid gap-3 col-10 mx-auto">
-                            <button class="btn btn-outline-primary" type="button" onclick="addProducto(<?php echo $codigo; ?>,
-                         '<?php echo $token_tmp; ?>')">Agregar al carrito</button>
+                            <button class="btn btn-outline-primary" type="button" onclick="addProducto(<?php echo $codigo; ?>, 
+                            cantidad.value, '<?php echo $token_tmp; ?>')">Agregar al carrito</button>
                         </div> 
                     </div>
                 </div>
@@ -178,10 +182,11 @@
     <!-- Custom JS -->
     <!--<script src="js/script.js"></script>-->
     <script>
-        function addProducto(codigo, token){
+        function addProducto(codigo, cantidad, token){
             let url = 'carrito.php'
             let formData = new FormData()
             formData.append('codigo', codigo)
+            formData.append('cantidad', cantidad)
             formData.append('token', token)
 
             fetch(url, {
