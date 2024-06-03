@@ -64,6 +64,7 @@
                                                                             <th>Nombre</th>
                                                                             <th>Descripción</th>
                                                                             <th>Disponibilidad</th>
+                                                                            <th>Catálogo</th>
                                                                             <th>Precio</th>
                                                                             <th>Descuento</th>
                                                                         </tr>  
@@ -74,20 +75,25 @@
                                                                             <td><input type="text" placeholder="Nombre del producto"></td>
                                                                             <td><input type="text" placeholder="Descripción del producto"></td>
                                                                             <td><input type="number" min="0" placeholder="0" name="" id=""></td>
+                                                                            <td><select name="catalogo" id="">
+                                                                                    <option value="Cat1">Novaventa</option>
+                                                                                    <option value="Cat2">Tupperware</option>
+                                                                                </select>
+                                                                            </td>
                                                                             <td><input type="number" min="0" placeholder="Precio" name="" id=""></td>
                                                                             <td><input type="number" min="0" placeholder="0" name="" id=""></td>
                                                                         </tr>
                                                                     </tbody> 
                                                                 </table>
-                                                            </div>
+                                                            </div>                                                          
+                                                        </form>
                                                         <div class="row">
-                                                                <div class="col d-flex justify-content-center">
-                                                                    <button class="btn btn-outline-primary">
-                                                                        Agregar producto
-                                                                    </button>
-                                                                </div>                                                                   
-                                                        </div>                                                              
-                                                        </form>                                                           
+                                                            <div class="col d-flex justify-content-center">
+                                                                <button class="btn btn-outline-primary">
+                                                                    Agregar producto
+                                                                </button>
+                                                            </div>   
+                                                        </div>                                                          
                                                     </div>
                                                 </div>
                                             </div>
@@ -99,18 +105,6 @@
                                         <div class="row">
                                             <div class="col">
                                                 <form action="#" class="table-responsive tb">
-                                                    <nav class="row">
-                                                        <div class="col ml-3">
-                                                            <input class="form-control ms-3" type="search" placeholder="Buscar producto..." aria-label="search">
-                                                        </div>
-                                                        <div class="col">
-                                                            <button class="btn btn-outline-primary btn-xs" type="submit">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                                                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-                                                                </svg>
-                                                            </button>
-                                                        </div>
-                                                    </nav>
                                                     <table class="table table-striped table-hover table-bordered m-3">
                                                         <thead>
                                                             <tr>
@@ -178,7 +172,7 @@
                                                     <table class="table table-striped table-hover table-bordered m-3">
                                                         <thead>
                                                             <tr>
-                                                                <th>Cedula</th>
+                                                                <th>Cedula</th> 
                                                                 <th>Nombre</th>
                                                                 <th>Apellido</th>
                                                                 <th>Correo</th>
@@ -195,7 +189,7 @@
                                                                 
                                                             $sql = $conexion->query("SELECT * FROM cliente");
                                                             while($datos = $sql->fetch_object()) { ?>
-                                                            <tr>
+                                                            <tr class="text-center">
                                                                 <td><?= $datos->cedula ?></td>
                                                                 <td><?= $datos->nombre ?></td>
                                                                 <td><?= $datos->apellido ?></td>
