@@ -6,7 +6,7 @@
     <!--Link CSS Bootstrap-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
     crossorigin="anonymous">
-     <link rel="stylesheet" href="./css/index.css">
+     <link rel="stylesheet" href="../css/index.css">
     <title>Administración de BD</title>
 </head>
 <body>
@@ -168,94 +168,51 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="container-fluid">
-                                        <div class="row">
-                                            <h5>Registrar Cliente</h5>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <form action="#" class="table-responsive tb">
-                                                            <div class="row">
-                                                                <table class="table table-striped table-hover table-bordered m-3">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>Cedula</th>
-                                                                            <th>Nombre</th>
-                                                                            <th>Apellido</th>
-                                                                            <th>Coreo-e</th>
-                                                                            <th>Teléfono</th>
-                                                                            <th>Dirección</th>
-                                                                        </tr>  
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <td><input type="text" placeholder="#Cedula"></td>
-                                                                            <td><input type="text" placeholder="Nombre"></td>
-                                                                            <td><input type="text" placeholder="Apellido"></td>
-                                                                            <td><input type="text" placeholder="Correo-e" name="" id=""></td>
-                                                                            <td><input type="text" placeholder="Teléfono" name="" id=""></td>
-                                                                            <td><input type="text" placeholder="Dirección"></td>
-                                                                        </tr>
-                                                                    </tbody> 
-                                                                </table>
-                                                            </div>
-                                                        <div class="row">
-                                                                <div class="col d-flex justify-content-center">
-                                                                    <button class="btn btn-outline-primary">
-                                                                        Agregar cliente
-                                                                    </button>
-                                                                </div>                                                                   
-                                                        </div>                                                              
-                                                        </form>                                                           
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                         <div class="row py-3">
                                             <h5>Clientes registrados</h5>
                                         </div>
                                         <!--Tabla clientes registrados-->
                                         <div class="row">
                                             <div class="col">
-                                                <form action="#" class="table-responsive tb">
-                                                    <nav class="row">
-                                                        <div class="col ml-3">
-                                                            <input class="form-control ms-3" type="search" placeholder="Buscar cliente..." aria-label="search">
-                                                        </div>
-                                                        <div class="col">
-                                                            <button class="btn btn-outline-primary btn-xs" type="submit">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                                                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-                                                                </svg>
-                                                            </button>
-                                                        </div>
-                                                    </nav>
+                                                <form class="table-responsive tb">
                                                     <table class="table table-striped table-hover table-bordered m-3">
                                                         <thead>
                                                             <tr>
                                                                 <th>Cedula</th>
                                                                 <th>Nombre</th>
                                                                 <th>Apellido</th>
-                                                                <th>Correo-e</th>
+                                                                <th>Correo</th>
                                                                 <th>Teléfono</th>
                                                                 <th>Dirección</th>                                                               
                                                             </tr>                   
                                                         </thead>
                                                         <tbody>
+                                                            <?php
+
+                                                            include '../paginas/conexion_db.php';
+                                                            include '../paginas/eliminar_cliente.php';
+                                                            
+                                                                
+                                                            $sql = $conexion->query("SELECT * FROM cliente");
+                                                            while($datos = $sql->fetch_object()) { ?>
                                                             <tr>
-                                                                <td>31414</td>
-                                                                <td>Galletas</td>
-                                                                <td>Galletas oreo de 100gr</td>
-                                                                <td>4</td>
-                                                                <td>$4000</td>
-                                                                <td>0</td>
+                                                                <td><?= $datos->cedula ?></td>
+                                                                <td><?= $datos->nombre ?></td>
+                                                                <td><?= $datos->apellido ?></td>
+                                                                <td><?= $datos->correo ?></td>
+                                                                <td><?= $datos->telefono ?></td>
+                                                                <td><?= $datos->direccion ?></td>
                                                                 <td>
-                                                                    <button class="btn btn-outline-primary">
+                                                                    <a href="../paginasAdmin/editor_cliente.php?cedula=<?= $datos->cedula ?>" class="btn btn-outline-primary">
+                                                                        Modificar
+                                                                    </a>
+                                                                    <a href="../paginasAdmin/adminProduct.php?cedula=<?= $datos->cedula ?>" class="btn btn-outline-primary">
                                                                         Eliminar
-                                                                    </button>
+                                                                    </a>
                                                                 </td>
                                                             </tr>
+                                                            <?php } 
+                                                            ?>
                                                         </tbody> 
                                                     </table>
                                                 </form>                                         
@@ -286,67 +243,13 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="container-fluid">
-                                        <div class="row">
-                                            <h5>Registrar Administrador</h5>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <form action="#" class="table-responsive tb">
-                                                            <div class="row">
-                                                                <table class="table table-striped table-hover table-bordered m-3">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>Cedula</th>
-                                                                            <th>Nombre</th>
-                                                                            <th>Apellido</th>
-                                                                            <th>Contraseña</th>
-                                                                            <th>Código</th>
-                                                                        </tr>  
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <td><input type="text" placeholder="Cedula"></td>
-                                                                            <td><input type="text" placeholder="Nombre"></td>
-                                                                            <td><input type="text" placeholder="Apellido"></td>
-                                                                            <td><input type="password" name="" id=""></td>
-                                                                            <td><input type="text" placeholder="Código" name="" id=""></td>
-                                                                        </tr>
-                                                                    </tbody> 
-                                                                </table>
-                                                            </div>
-                                                        <div class="row">
-                                                                <div class="col d-flex justify-content-center">
-                                                                    <button class="btn btn-outline-primary">
-                                                                        Agregar administrador
-                                                                    </button>
-                                                                </div>                                                                   
-                                                        </div>                                                              
-                                                        </form>                                                           
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                         <div class="row py-3">
                                             <h5>Administadores registrados</h5>
                                         </div>
                                         <!--Tabla administradores registrados-->
                                         <div class="row">
                                             <div class="col">
-                                                <form action="#" class="table-responsive tb">
-                                                    <nav class="row">
-                                                        <div class="col ml-3">
-                                                            <input class="form-control ms-3" type="search" placeholder="Buscar administrador..." aria-label="search">
-                                                        </div>
-                                                        <div class="col">
-                                                            <button class="btn btn-outline-primary btn-xs" type="submit">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                                                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-                                                                </svg>
-                                                            </button>
-                                                        </div>
-                                                    </nav>
+                                                <form class="table-responsive tb">
                                                     <table class="table table-striped table-hover table-bordered m-3">
                                                         <thead>
                                                             <tr>
@@ -354,22 +257,35 @@
                                                                 <th>Nombre</th>
                                                                 <th>Apellido</th>
                                                                 <th>Contraseña</th>
-                                                                <th>Código</th>                                                             
+                                                                <th>Codigo</th>                                                             
                                                             </tr>                   
                                                         </thead>
                                                         <tbody>
+                                                            <?php
+
+                                                            include '../paginas/conexion_db.php';
+                                                            include '../paginas/eliminar_admin.php';
+                                                            
+                                                                
+                                                            $sql = $conexion->query("SELECT * FROM administrador");
+                                                            while($datos = $sql->fetch_object()) { ?>
                                                             <tr>
-                                                                <td>31414</td>
-                                                                <td>Galletas</td>
-                                                                <td>Galletas oreo de 100gr</td>
-                                                                <td>4</td>
-                                                                <td>$4000</td>
+                                                                <td><?= $datos->cedula_admin ?></td>
+                                                                <td><?= $datos->nombre_admin ?></td>
+                                                                <td><?= $datos->apellido_admin ?></td>
+                                                                <td><?= $datos->contra_admin ?></td>
+                                                                <td><?= $datos->codigo_admin ?></td>
                                                                 <td>
-                                                                    <button class="btn btn-outline-primary">
+                                                                    <a href="../paginasAdmin/editor_admin.php?cedula_admin=<?= $datos->cedula_admin ?>" class="btn btn-outline-primary">
+                                                                        Modificar
+                                                                    </a>
+                                                                    <a href="../paginasAdmin/adminProduct.php?cedula_admin=<?= $datos->cedula_admin ?>" class="btn btn-outline-primary">
                                                                         Eliminar
-                                                                    </button>
+                                                                    </a>
                                                                 </td>
                                                             </tr>
+                                                            <?php } 
+                                                            ?>
                                                         </tbody> 
                                                     </table>
                                                 </form>                                         
