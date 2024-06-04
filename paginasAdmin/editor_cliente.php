@@ -34,19 +34,19 @@ $sql = $conexion->query("SELECT * FROM cliente WHERE cedula=$cedula")
                         <div class="row d-flex justify-content-center">
                             <div class="col-4 mt-3 modifyC">
                                 <label for="name">Nombre</label>
-                                <input type="text" name="name" class="form-control border border-dark border-1 " value="<?= $datos->nombre ?>">
+                                <input type="text" name="name" class="form-control border border-dark border-1 " value="<?= $datos->nombre ?>" required>
                             
                                 <label for="lastname">Apellidos</label>
-                                <input type="text" name="lastname" class="form-control border border-dark border-1" value="<?= $datos->apellido ?>">
+                                <input type="text" name="lastname" class="form-control border border-dark border-1" value="<?= $datos->apellido ?>" required>
                             
                                 <label for="email">Correo electrónico</label>
-                                <input type="email" name="email" class="form-control border border-dark border-1" value="<?= $datos->correo ?>">
+                                <input type="email" name="email" class="form-control border border-dark border-1" value="<?= $datos->correo ?>" required>
                             
                                 <label for="cellphone">Telefono</label>
-                                <input type="tel" name="cellphone" class="form-control border border-dark border-1" value="<?= $datos->telefono ?>">
+                                <input type="tel" name="cellphone" class="form-control border border-dark border-1" value="<?= $datos->telefono ?>" required>
                             
                                 <label for="address">Direccion</label>
-                                <input type="text" name="address" id="address" class="form-control border border-dark border-1" value="<?= $datos->direccion ?>">
+                                <input type="text" name="address" id="address" class="form-control border border-dark border-1" value="<?= $datos->direccion ?>" required>
                             </div>
                         </div>            
                     <?php }

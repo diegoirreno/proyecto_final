@@ -35,17 +35,17 @@ $sql = $conexion->query("SELECT * FROM administrador WHERE cedula_admin=$cedula_
                         <div class="row d-flex justify-content-center">
                             <div class="col-4 mt-3 modifyC">
                                 <label for="name">Nombres</label>
-                                <input type="text" name="name_admin" class="form-control border border-dark border-1 " value="<?= $datos->nombre_admin ?>">
+                                <input type="text" name="name_admin" class="form-control border border-dark border-1 " value="<?= $datos->nombre_admin ?>" required>
 
                                 <label for="lastname">Apellidos</label>
-                                <input type="text" name="lastname_admin" class="form-control border border-dark border-1" value="<?= $datos->apellido_admin ?>">
+                                <input type="text" name="lastname_admin" class="form-control border border-dark border-1" value="<?= $datos->apellido_admin ?>" required>
 
                                 <label for="password">Contraseña</label>
-                                <input type="password" name="password_admin" class="form-control border border-dark border-1" value="<?= $datos->contra_admin ?>">
+                                <input type="password" name="password_admin" class="form-control border border-dark border-1" value="<?= $datos->contra_admin ?>" required>
 
 
                                 <label for="code">Código</label>
-                                <input type="number" name="code_admin" class="form-control border border-dark border-1" value="<?= $datos->codigo_admin ?>">
+                                <input type="number" name="code_admin" class="form-control border border-dark border-1" value="<?= $datos->codigo_admin ?>" required>
                             </div>
                         </div>
                             

@@ -34,11 +34,11 @@ $sql = $conexion->query("SELECT * FROM productos WHERE codigo=$codigo")
                         <div class="row d-flex justify-content-center">
                         <div class="form-group col-md-12">
                             <label for="nombre producto">Nombre</label>
-                            <input type="text" name="nombre_produ" class="form-control border border-dark border-1" value="<?= $datos->nombre ?>">
+                            <input type="text" name="nombre_produ" class="form-control border border-dark border-1" value="<?= $datos->nombre ?>" required>
                         </div>
                         <div class="form-group col-md-12">
                             <label for="descripcion producto">Descripción</label>
-                            <input type="text" name="descripcion_produ" class="form-control border border-dark border-1" value="<?= $datos->descripcion ?>">
+                            <input type="text" name="descripcion_produ" class="form-control border border-dark border-1" value="<?= $datos->descripcion ?>" required>
                         </div>
                         <div class="form-group col-md-12">
                             <label for="disponibilidad producto">Disponible</label>
@@ -50,7 +50,7 @@ $sql = $conexion->query("SELECT * FROM productos WHERE codigo=$codigo")
                         </div>
                         <div class="form-group col-md-12">
                             <label for="precio">Precio</label>
-                            <input type="text" name="precio_produ" class="form-control border border-dark border-1" value="<?= $datos->precio ?>">
+                            <input type="text" name="precio_produ" class="form-control border border-dark border-1" value="<?= $datos->precio ?>" required>
                         </div>
                         <div class="form-group col-md-12">
                             <label for="descuento producto">Descuento</label>

@@ -73,27 +73,27 @@
                     </div>
                     <div class="form-group col-md-12">
                         <label for="id">Documento de identidad</label>
-                        <input type="text" name="document" class="form-control border border-dark border-1">
+                        <input type="text" name="document" class="form-control border border-dark border-1" required>
                     </div>
                     <div class="form-group col-md-12">
                         <label for="name">Nombre</label>
-                        <input type="text" name="name" class="form-control border border-dark border-1 ">
+                        <input type="text" name="name" class="form-control border border-dark border-1 " required>
                     </div>
                     <div class="form-group col-md-12">
                         <label for="lastname">Apellidos</label>
-                        <input type="text" name="lastname" class="form-control border border-dark border-1">
+                        <input type="text" name="lastname" class="form-control border border-dark border-1" required>
                     </div>
                     <div class="form-group col-md-12">
                         <label for="email">Correo electrónico</label>
-                        <input type="email" name="email" class="form-control border border-dark border-1">
+                        <input type="email" name="email" class="form-control border border-dark border-1" required>
                     </div>
                     <div class="form-group col-md-12">
                         <label for="cellphone">Telefono</label>
-                        <input type="tel" name="cellphone" class="form-control border border-dark border-1">
+                        <input type="tel" name="cellphone" class="form-control border border-dark border-1" required>
                     </div>
                     <div class="form-group col-md-12">
                         <label for="address">Direccion</label>
-                        <input type="text" name="address" id="address" class="form-control border border-dark border-1">
+                        <input type="text" name="address" id="address" class="form-control border border-dark border-1" required>
                     </div>
                     <div class="text-center mt-3">
                         <!--<input class="btn btn-outline-primary"class="form-control border border-dark border-1">-->

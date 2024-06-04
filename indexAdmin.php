@@ -55,11 +55,11 @@
                     <!--Register-->
                     <form action="paginas/registro_admin.php" method="POST" class="formulario__register">
                         <h2>Regístrarse</h2>
-                        <input type="number" placeholder="Cédula" name="cedu_admin">    
-                        <input type="text" placeholder="Nombres" name="name_admin">
-                        <input type="text" placeholder="Apellidos" name="lastname_admin">
-                        <input type="password" placeholder="Contraseña" name="password_admin">
-                        <input type="number" placeholder="Código" name="code_admin">
+                        <input type="number" placeholder="Cédula" name="cedu_admin" required>    
+                        <input type="text" placeholder="Nombres" name="name_admin" required>
+                        <input type="text" placeholder="Apellidos" name="lastname_admin" required>
+                        <input type="password" placeholder="Contraseña" name="password_admin" required>
+                        <input type="number" placeholder="Código" name="code_admin" required>
                         <button>Regístrarse</button>
                     </form>
                 </div>
