@@ -74,7 +74,7 @@
                                                             <?php
 
                                                             include '../paginas/conexion_db.php';
-                                                            //include '../paginas/eliminar_cliente.php';
+                                                            include '../paginas/eliminar_producto.php';
                                                             
                                                                 
                                                             $sql = $conexion->query("SELECT * FROM productos");
