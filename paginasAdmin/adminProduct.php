@@ -57,35 +57,47 @@
                                         <!--Tabla productos registrados-->
                                         <div class="row">
                                             <div class="col">
-                                                <form action="#" class="table-responsive tb">
+                                                <form class="table-responsive tb">
                                                     <table class="table table-striped table-hover table-bordered m-3">
                                                         <thead>
                                                             <tr>
-                                                                <th>Código</th>
+                                                                <th>Codigo</th> 
                                                                 <th>Nombre</th>
                                                                 <th>Descripción</th>
                                                                 <th>Disponibilidad</th>
-                                                                <th>Catálogo</th>
-                                                                <th>precio</th>
-                                                                <th>Descuento</th>
-                                                                <th>Eliminar</th>
+                                                                <th>Precio</th>
+                                                                <th>Descuento</th>  
+                                                                <th>Catalogo</th>                                                             
                                                             </tr>                   
                                                         </thead>
                                                         <tbody>
-                                                            <tr>
-                                                                <td>31414</td>
-                                                                <td>Galletas</td>
-                                                                <td>Galletas oreo de 100gr</td>
-                                                                <td>4</td>
-                                                                <td>novaventa</td>
-                                                                <td>$4000</td>
-                                                                <td>0</td>
+                                                            <?php
+
+                                                            include '../paginas/conexion_db.php';
+                                                            //include '../paginas/eliminar_cliente.php';
+                                                            
+                                                                
+                                                            $sql = $conexion->query("SELECT * FROM productos");
+                                                            while($datos = $sql->fetch_object()) { ?>
+                                                            <tr class="text-center">
+                                                                <td><?= $datos->codigo ?></td>
+                                                                <td><?= $datos->nombre ?></td>
+                                                                <td><?= $datos->descripcion ?></td>
+                                                                <td><?= $datos->disponibilidad ?></td>
+                                                                <td><?= $datos->precio ?></td>
+                                                                <td><?= $datos->descuento ?></td>
+                                                                <td><?= $datos->catalogo ?></td>
                                                                 <td>
-                                                                    <button class="btn btn-outline-primary">
+                                                                    <a href="../paginasAdmin/editor_producto.php?codigo=<?= $datos->codigo ?>" class="btn btn-outline-primary">
+                                                                        Modificar
+                                                                    </a>
+                                                                    <a href="../paginasAdmin/adminProduct.php?codigo=<?= $datos->codigo ?>" class="btn btn-outline-primary">
                                                                         Eliminar
-                                                                    </button>
+                                                                    </a>
                                                                 </td>
                                                             </tr>
+                                                            <?php } 
+                                                            ?>
                                                         </tbody> 
                                                     </table>
                                                 </form>                                         
