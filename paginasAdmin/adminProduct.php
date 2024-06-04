@@ -36,8 +36,11 @@
                 <div class="col-4 d-flex justify-content-center">
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                        Productos
+                        Consulta de productos
                     </button>
+                    <a href="../paginas/registrar_producto.php" type="button">
+                        Registrar productos
+                    </a>
                     <!-- Modal -->
                     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-fullscreen">
@@ -47,57 +50,7 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <div class="container-fluid">
-                                        <div class="row">
-                                            <h5>Registrar producto</h5>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <form action="#" class="table-responsive tb">
-                                                            <div class="row">
-                                                                <table class="table table-striped table-hover table-bordered m-3">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>Código</th>
-                                                                            <th>Nombre</th>
-                                                                            <th>Descripción</th>
-                                                                            <th>Disponibilidad</th>
-                                                                            <th>Catálogo</th>
-                                                                            <th>Precio</th>
-                                                                            <th>Descuento</th>
-                                                                        </tr>  
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <td><input type="text" placeholder="Código del producto"></td>
-                                                                            <td><input type="text" placeholder="Nombre del producto"></td>
-                                                                            <td><input type="text" placeholder="Descripción del producto"></td>
-                                                                            <td><input type="number" min="0" placeholder="0" name="" id=""></td>
-                                                                            <td><select name="catalogo" id="">
-                                                                                    <option value="Cat1">Novaventa</option>
-                                                                                    <option value="Cat2">Tupperware</option>
-                                                                                </select>
-                                                                            </td>
-                                                                            <td><input type="number" min="0" placeholder="Precio" name="" id=""></td>
-                                                                            <td><input type="number" min="0" placeholder="0" name="" id=""></td>
-                                                                        </tr>
-                                                                    </tbody> 
-                                                                </table>
-                                                            </div>                                                          
-                                                        </form>
-                                                        <div class="row">
-                                                            <div class="col d-flex justify-content-center">
-                                                                <button class="btn btn-outline-primary">
-                                                                    Agregar producto
-                                                                </button>
-                                                            </div>   
-                                                        </div>                                                          
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>                           
+                                    <div class="container-fluid">                         
                                         <div class="row py-3">
                                             <h5>Productos registrados</h5>
                                         </div>
@@ -112,6 +65,7 @@
                                                                 <th>Nombre</th>
                                                                 <th>Descripción</th>
                                                                 <th>Disponibilidad</th>
+                                                                <th>Catálogo</th>
                                                                 <th>precio</th>
                                                                 <th>Descuento</th>
                                                                 <th>Eliminar</th>
@@ -123,10 +77,10 @@
                                                                 <td>Galletas</td>
                                                                 <td>Galletas oreo de 100gr</td>
                                                                 <td>4</td>
+                                                                <td>novaventa</td>
                                                                 <td>$4000</td>
                                                                 <td>0</td>
                                                                 <td>
-                                                                    <input type="number">
                                                                     <button class="btn btn-outline-primary">
                                                                         Eliminar
                                                                     </button>

@@ -144,6 +144,11 @@
                     ?></h6>
                 </div>
             </div>
+            <a type="button" href="../indexF.php">Finalizar
+            <?php
+                    session_destroy();
+                    ?>
+            </a>
         </div>
     </main>
     <footer>

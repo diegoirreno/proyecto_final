@@ -19,7 +19,7 @@
 
         echo'
         <script>
-            alert("Uno o mas campos estan vacios, por completarlos todos");
+            alert("Uno o mas campos estan vacios, por favor completarlos todos");
             window.location = "registrar_cli.php"
         </script>
     ';
