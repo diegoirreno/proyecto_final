@@ -16,10 +16,21 @@ if(!empty($_POST)){
     $precio = trim($_POST['precio_produ']);
     $catalogo = trim($_POST['tipo_catalogo']);
 
+
+    $validar = "SELECT * FROM productos WHERE codigo = '$codigo' ";
+    $validando = $conexion->query($validar);
+
+    if($validando->num_rows > 0){
+        
+    echo "<div class='alert alert-warning'>No puedes agregar dos productos con el mismo codigo</div>"; 
+
+    }else{
+   
+
     $id = registrar([$codigo,$nombre,$descripcion,$precio,$catalogo], $conexion);
 
-    if($id>0){
-        echo "<div class='alert alert-warning'>El producto fue registrado con exito</div>";
+    if($id > 0){
+        echo "<div class='alert alert-success'>El producto fue registrado con exito</div>";
     }else{
         $errors[] = "Error al registrar el producto";
     }
@@ -28,6 +39,8 @@ if(!empty($_POST)){
 
     }else{
         print_r($errors);
+    }
+
     }
 }
 

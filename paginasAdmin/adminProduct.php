@@ -95,8 +95,10 @@
                                                                 <td><?php 
                                                                  if(($datos->catalogo)==1){
                                                                     echo "Novaventa";
-                                                                 }else{
+                                                                 }else if(($datos->catalogo)==2){
                                                                     echo "TupperWare";
+                                                                 }else{
+                                                                    echo "Otro catalogo";
                                                                  }
                                                                   ?></td>
                                                                 <td>
