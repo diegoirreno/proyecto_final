@@ -61,13 +61,13 @@
                                                     <table class="table table-striped table-hover table-bordered m-3">
                                                         <thead>
                                                             <tr>
-                                                                <th>Codigo</th> 
+                                                                <th>Código</th> 
                                                                 <th>Nombre</th>
                                                                 <th>Descripción</th>
-                                                                <th>Disponibilidad</th>
+                                                                <th>Disponible</th>
                                                                 <th>Precio</th>
                                                                 <th>Descuento</th>  
-                                                                <th>Catalogo</th>                                                             
+                                                                <th>Catálogo</th>                                                             
                                                             </tr>                   
                                                         </thead>
                                                         <tbody>
@@ -83,10 +83,22 @@
                                                                 <td><?= $datos->codigo ?></td>
                                                                 <td><?= $datos->nombre ?></td>
                                                                 <td><?= $datos->descripcion ?></td>
-                                                                <td><?= $datos->disponibilidad ?></td>
+                                                                <td><?php 
+                                                                 if(($datos->disponibilidad)==1){
+                                                                    echo "si";
+                                                                 }else{
+                                                                    echo "no";
+                                                                 }
+                                                                  ?></td>
                                                                 <td><?= $datos->precio ?></td>
                                                                 <td><?= $datos->descuento ?></td>
-                                                                <td><?= $datos->catalogo ?></td>
+                                                                <td><?php 
+                                                                 if(($datos->catalogo)==1){
+                                                                    echo "Novaventa";
+                                                                 }else{
+                                                                    echo "TupperWare";
+                                                                 }
+                                                                  ?></td>
                                                                 <td>
                                                                     <a href="../paginasAdmin/editor_producto.php?codigo=<?= $datos->codigo ?>" class="btn btn-outline-primary">
                                                                         Modificar

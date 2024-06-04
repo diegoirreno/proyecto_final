@@ -41,8 +41,12 @@ $sql = $conexion->query("SELECT * FROM productos WHERE codigo=$codigo")
                             <input type="text" name="descripcion_produ" class="form-control border border-dark border-1" value="<?= $datos->descripcion ?>">
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="disponibilidad producto">Disponibilidad</label>
-                            <input type="number" min="0" max="1" step="1" name="disponibilidad_produ" class="form-control border border-dark border-1" value="<?= $datos->disponibilidad ?>" required>
+                            <label for="disponibilidad producto">Disponible</label>
+                            <select name="disponibilidad_produ" class="form-control border border-dark border-1" value="<?= $datos->disponibilidad ?>" required>
+                            <option value="">Seleccionar</option>
+                            <option value="1">Sí</option>
+                            <option value="0">No</option>
+                            </select>
                         </div>
                         <div class="form-group col-md-12">
                             <label for="precio">Precio</label>
