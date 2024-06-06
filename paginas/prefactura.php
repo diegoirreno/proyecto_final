@@ -2,6 +2,22 @@
 
     include 'config.php';
     include 'database.php';
+    require '../paginas/conexion_db.php';
+
+    $cedula = $_GET['cedula'];
+    $sql = $conexion->query("SELECT * FROM cliente WHERE cedula=$cedula");
+    if($sql->num_rows>0)
+    {
+        $row = $sql->fetch_assoc();
+        $nombre = $row['nombre'];
+        $apellido = $row['apellido'];
+        $correo = $row['correo'];
+        $telefono = $row['telefono'];
+        $direccion = $row['direccion'];
+    }else{
+
+        echo "No se encontraron datos para la cedula";
+    }
 
     $db = new Database();
     $con = $db->conectar();
@@ -48,7 +64,7 @@
             <nav class="row navbar navbar-expand-md navbar-light bg-light border-bottom border-primary">
 
                 <div class="col-3">
-                    <a href="../indexF.php" class="navbar-brand">Distribuciones Irreño</a>
+                    <a class="navbar-brand">Distribuciones Irreño</a>
                     <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#Menu">
                         <span class="navbar-toggler-icon">
                         </span>
@@ -73,6 +89,15 @@
                     <h4>Prefactura</h4>
                 </div>
             </div>
+            <div>
+                <?php
+                     echo "<p>Nombre: $nombre </p>";
+                     echo "<p>Apellido: $apellido</p>";
+                     echo "<p>Correo: $correo</p>";
+                     echo "<p>Telefono: $telefono</p>";
+                     echo "<p>Direccion: $direccion</p>";
+                ?>
+            </div>
             <!--Row contenedora del Hero-->
             <div class="row mt-3">
                 <!--Col izquierda que contiene la cola de los productos-->
@@ -86,6 +111,7 @@
                                         <th>Valor unitario</th>
                                         <th>Cantidad</th>
                                         <th>Subtotal</th>
+                                        <th>Total</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -116,6 +142,7 @@
                                             <div id="subtotal_<?php echo $_codigo; ?>" name="subtotal[]"><?php echo MONEDA . 
                                             number_format($subtotal,0, '.', ','); ?></div>
                                         </td>
+                                        <td><?php echo $total ?></td>
                                     </tr>
                                     <?php } ?>
                                 </tbody>
@@ -125,17 +152,6 @@
                      </div>
             </div>
             <!---->
-            <div class="row my-3">
-                <div class="col bg-light">
-                    <h6>Total: <?php 
-                    if(empty($total)){
-                        echo '$0';
-                    }else {
-                        echo MONEDA . number_format($total, 0, '.', ','); 
-                    }
-                    ?></h6>
-                </div>
-            </div>
             <a type="button" href="../indexF.php">Finalizar
             <?php
                     session_destroy();
@@ -146,7 +162,7 @@
     <footer>
         <div class="container-fluid bg-light p-0">
             <nav class="row navbar navbar-expand-md navbar-light bg-light">
-                <a href="../indexF.php" class="col navbar-brand">Distribuciones Irreño</a>
+                <a class="col navbar-brand">Distribuciones Irreño</a>
                 <ul class="col list-unstyled">
                     <li>
                         <h5>Acerca de nosotros</h5>
