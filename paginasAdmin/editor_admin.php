@@ -7,7 +7,7 @@ $sql = $conexion->query("SELECT * FROM administrador WHERE cedula_admin=$cedula_
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"> 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,8 +52,10 @@ $sql = $conexion->query("SELECT * FROM administrador WHERE cedula_admin=$cedula_
                     <?php }
                     ?>
                     <div class="row d-flex justify-content-center">
-                        <div class="col-3 d-flex justify-content-center">
-                            <button type="submit" class="btn btn-primary" name="btnmodificaradmin" value="ok">Modificar Administrador</button>
+                        <div class="col-3 d-flex justify-content-center mt-3">
+                            <button type="submit" class="btn btn-primary" name="btnmodificaradmin" value="ok">
+                                Modificar Administrador
+                            </button>
                         </div>
                     </div>
                     <div class="row d-flex justify-content-center">

@@ -18,7 +18,7 @@ $sql = $conexion->query("SELECT * FROM cliente WHERE cedula=$cedula")
 </head>
 <body>
     <main class="container-fluid">
-        <div class="row"> 
+        <div class="row">  
             <div class="col">
                 <form method="POST" class="p-3 form">
                     <h2>Modificar cliente</h2>
