@@ -1,3 +1,4 @@
+
 <?php
 
 if(!empty($_GET['cedula_admin'])){

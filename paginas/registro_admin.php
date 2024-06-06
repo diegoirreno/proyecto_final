@@ -1,3 +1,4 @@
+
 <?php
 
     include 'conexion_db.php';
@@ -43,9 +44,9 @@
             </script>
         ';
 
-    }else{
+    }else if($codigo_admin == 11111){
 
-    //insertar clientes a ala base de datos
+    //insertar administradores a ala base de datos
     $insertar = "INSERT INTO administrador(cedula_admin,nombre_admin,apellido_admin,contra_admin,codigo_admin) 
               VALUES('$cedula_admin', '$nombre_admin', '$apellido_admin', '$contrasena_admin', '$codigo_admin')";
     $guardar = $conexion->query($insertar);
@@ -65,5 +66,12 @@
     ';
     }
 
+    }else{
+        echo'
+        <script>
+            alert("El administrador no fue registrado, el codigo es incorrecto");
+            window.location = "../indexAdmin.php"
+        </script>
+    '; 
     }
 ?>

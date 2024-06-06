@@ -1,3 +1,4 @@
+
 <?php
 
     include 'config.php';
@@ -14,6 +15,7 @@
         $correo = $row['correo'];
         $telefono = $row['telefono'];
         $direccion = $row['direccion'];
+
     }else{
 
         echo "No se encontraron datos para la cedula";
@@ -24,7 +26,7 @@
 
     $productos = isset($_SESSION['carrito']['productos']) ? $_SESSION['carrito']['productos'] : null;
 
-    //print_r($_SESSION);
+    $fecha = date("Y-m-d H:i:s");
 
     $lista_carrito = array();
 
@@ -43,7 +45,7 @@
         </script>
     ';
     }
-    //session_destroy();
+    
   
 
 ?>
@@ -111,7 +113,6 @@
                                         <th>Valor unitario</th>
                                         <th>Cantidad</th>
                                         <th>Subtotal</th>
-                                        <th>Total</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -142,9 +143,14 @@
                                             <div id="subtotal_<?php echo $_codigo; ?>" name="subtotal[]"><?php echo MONEDA . 
                                             number_format($subtotal,0, '.', ','); ?></div>
                                         </td>
-                                        <td><?php echo $total ?></td>
                                     </tr>
                                     <?php } ?>
+                                    <tr>
+                                        <td colspan="3"></td>
+                                        <td colspan="2">
+                                            <p class="h3 text-end" id="total">Total: <?php echo MONEDA.number_format($total, 0, '.',','); ?></p>
+                                        </td>
+                                    </tr>
                                 </tbody>
                              <?php } ?>
                             </table>
@@ -154,8 +160,44 @@
             <!---->
             <a type="button" href="../indexF.php">Finalizar
             <?php
-                    session_destroy();
-                    ?>
+            
+            $sql = $conexion->prepare("INSERT INTO prefactura(fecha, correo_cli,cedula_cli,total) VALUES (?,?,?,?)");
+            $sql->execute([$fecha,$correo,$cedula,$total]);
+            
+            if($sql)
+            {
+                $last_id = $conexion->insert_id;
+                $productos = isset($_SESSION['carrito']['productos']) ? $_SESSION['carrito']['productos'] : null;
+
+                if($productos != null) {
+
+                    foreach($productos as $clave => $cantidad){
+                    $sql = $con->prepare("SELECT codigo,nombre,precio,descuento,disponibilidad, $cantidad AS cantidad FROM productos WHERE codigo=? AND disponibilidad = 1");
+                    $sql->execute([$clave]);
+                    $row_prod = $sql->fetch(PDO::FETCH_ASSOC); 
+
+                    $precio = $row_prod['precio'];
+                    $descuento = $row_prod['descuento'];
+                    $precio_desc = $precio -(($precio*$descuento)/100);
+
+                    $sql_insert= $conexion->prepare("INSERT INTO detalle_prefactura (id_prefactura, codigo_producto, nombre_producto, 
+                    precio_producto, cantidad) VALUES (?,?,?,?,?)");
+                    $sql_insert ->execute([$last_id, $clave, $row_prod['nombre'], $precio_desc, $cantidad]);
+
+                    }
+                }else{
+                    echo'
+                    <script>
+                     alert("Error al insertar los datos");
+                    window.location = "indexF.php"
+                    </script>
+                    ';
+                }
+            }
+            
+
+            session_destroy();
+            ?>
             </a>
         </div>
     </main>

@@ -1,3 +1,4 @@
+
 <?php
 
 function registrar(array $datos,$conexion)

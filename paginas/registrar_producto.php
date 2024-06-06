@@ -1,3 +1,4 @@
+
 <?php
 require '../paginas/conexion_db.php';
 require 'database.php';
