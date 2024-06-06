@@ -165,20 +165,18 @@
                      </div>
                 <!--Col derecha que contiene la descripcion y opciones de la cola pedido-->
                 <div class="col-4">
-                    <form action="#">
+                    <form action="../paginas/validar_cliente.php" method="POST">
                         <h5>Confirmación del pedido</h5>
                         <p>Para confirmar su pedido por favor digite su número de cedula, recuerde que debe estar previamente registrado para poder continuar.</p>
                         <label for="id">Documento de identidad :</label>
                         <input type="text" name="cedula_vali" class="form-control border border-dark border-1">
                         <br>
                         <?php if($lista_carrito != null) { ?>
-                        <div class="btn-group">
-                        <a href="../paginas/prefactura.php" class="btn btn-primary btn-lg">Confirmar</a>
-                         </div>
+                        <button class="btn btn-primary btn-lg">Confirmar</button>
                          <?php } ?>
-                        
                          <br>
                     </form>
+                    
                 </div>
             </div>
             <!---->
