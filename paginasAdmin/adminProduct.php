@@ -32,15 +32,180 @@
     <main>
         <div class="container-fluid">
             <nav class="row m-2">
+                <!--Modal Clientes-->
+                <div class="col-2 d-flex justify-content-center">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
+                        Clientes
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-fullscreen">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Clientes</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="container-fluid">
+                                        <div class="row py-3">
+                                            <h5>Clientes registrados</h5>
+                                        </div>
+                                        <!--Tabla clientes registrados-->
+                                        <div class="row">
+                                            <div class="col">
+                                                <form class="table-responsive tb">
+                                                    <table class="table table-striped table-hover table-bordered m-3">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Cedula</th> 
+                                                                <th>Nombre</th>
+                                                                <th>Apellido</th>
+                                                                <th>Correo</th>
+                                                                <th>Teléfono</th>
+                                                                <th>Dirección</th>                                                               
+                                                            </tr>                   
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php
+
+                                                            include '../paginas/conexion_db.php';
+                                                            include '../paginas/eliminar_cliente.php';
+                                                            
+                                                                
+                                                            $sql = $conexion->query("SELECT * FROM cliente");
+                                                            while($datos = $sql->fetch_object()) { ?>
+                                                            <tr class="text-center">
+                                                                <td><?= $datos->cedula ?></td>
+                                                                <td><?= $datos->nombre ?></td>
+                                                                <td><?= $datos->apellido ?></td>
+                                                                <td><?= $datos->correo ?></td>
+                                                                <td><?= $datos->telefono ?></td>
+                                                                <td><?= $datos->direccion ?></td>
+                                                                <td>
+                                                                    <a href="../paginasAdmin/editor_cliente.php?cedula=<?= $datos->cedula ?>" class="btn btn-outline-primary">
+                                                                        Modificar
+                                                                    </a>
+                                                                    <a href="../paginasAdmin/adminProduct.php?cedula=<?= $datos->cedula ?>" class="btn btn-outline-primary">
+                                                                        Eliminar
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                            <?php } 
+                                                            ?>
+                                                        </tbody> 
+                                                    </table>
+                                                </form>                                         
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">                                       
+                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Modal Administradores-->
+                <div class="col-2 d-flex justify-content-center">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop3">
+                        Administradores
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="staticBackdrop3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-fullscreen">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Administradores</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="container-fluid">
+                                        <div class="row py-3">
+                                            <h5>Administadores registrados</h5>
+                                        </div>
+                                        <!--Tabla administradores registrados-->
+                                        <div class="row">
+                                            <div class="col">
+                                                <form class="table-responsive tb">
+                                                    <table class="table table-striped table-hover table-bordered m-3">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Cedula</th>
+                                                                <th>Nombre</th>
+                                                                <th>Apellido</th>
+                                                                <th>Contraseña</th>
+                                                                <th>Codigo</th>                                                             
+                                                            </tr>                   
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php
+
+                                                            include '../paginas/conexion_db.php';
+                                                            include '../paginas/eliminar_admin.php';
+                                                            
+                                                                
+                                                            $sql = $conexion->query("SELECT * FROM administrador");
+                                                            while($datos = $sql->fetch_object()) { ?>
+                                                            <tr class="text-center">
+                                                                <td><?= $datos->cedula_admin ?></td>
+                                                                <td><?= $datos->nombre_admin ?></td>
+                                                                <td><?= $datos->apellido_admin ?></td>
+                                                                <td><?= $datos->contra_admin ?></td>
+                                                                <td><?= $datos->codigo_admin ?></td>
+                                                                <td>
+                                                                    <a href="../paginasAdmin/editor_admin.php?cedula_admin=<?= $datos->cedula_admin ?>" class="btn btn-outline-primary">
+                                                                        Modificar
+                                                                    </a>
+                                                                    <a href="../paginasAdmin/adminProduct.php?cedula_admin=<?= $datos->cedula_admin ?>" class="btn btn-outline-primary">
+                                                                        Eliminar
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                            <?php } 
+                                                            ?>
+                                                        </tbody> 
+                                                    </table>
+                                                </form>                                         
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">                                       
+                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <!--Modal Productos-->
                 <div class="col-4 d-flex justify-content-center">
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                        Consulta de productos
-                    </button>
-                    <a href="../paginas/registrar_producto.php" type="button">
-                        Registrar productos
-                    </a>
+                    <!--BTN Dropdown-->
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle bg-primary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Productos
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                        Consulta de productos
+                                    </button>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item text-center" href="../paginas/registrar_producto.php">
+                                    <button type="button" class="btn btn-primary">
+                                        Registrar productos
+                                    </button>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+            
                     <!-- Modal -->
                     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-fullscreen">
@@ -125,68 +290,48 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <!--Modal Clientes-->
-                <div class="col-4 d-flex justify-content-center">
+                </div>     
+                <!--Modal Catálogo-->
+                <div class="col-2 d-flex justify-content-center">
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
-                        Clientes
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop4">
+                        Catálogo
                     </button>
                     <!-- Modal -->
-                    <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal fade" id="staticBackdrop4" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-fullscreen">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Clientes</h1>
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Catálogos</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
                                     <div class="container-fluid">
                                         <div class="row py-3">
-                                            <h5>Clientes registrados</h5>
+                                            <h5>Catálogos Registrados</h5>
                                         </div>
-                                        <!--Tabla clientes registrados-->
+                                        <!--Tabla catálogo-->
                                         <div class="row">
                                             <div class="col">
                                                 <form class="table-responsive tb">
                                                     <table class="table table-striped table-hover table-bordered m-3">
                                                         <thead>
                                                             <tr>
-                                                                <th>Cedula</th> 
-                                                                <th>Nombre</th>
-                                                                <th>Apellido</th>
-                                                                <th>Correo</th>
-                                                                <th>Teléfono</th>
-                                                                <th>Dirección</th>                                                               
+                                                                <th>a</th>
+                                                                <th>a</th>
+                                                                <th>a</th>
+                                                                <th>a</th>
+                                                                <th>a</th>                                                             
                                                             </tr>                   
                                                         </thead>
                                                         <tbody>
-                                                            <?php
-
-                                                            include '../paginas/conexion_db.php';
-                                                            include '../paginas/eliminar_cliente.php';
-                                                            
-                                                                
-                                                            $sql = $conexion->query("SELECT * FROM cliente");
-                                                            while($datos = $sql->fetch_object()) { ?>
-                                                            <tr class="text-center">
-                                                                <td><?= $datos->cedula ?></td>
-                                                                <td><?= $datos->nombre ?></td>
-                                                                <td><?= $datos->apellido ?></td>
-                                                                <td><?= $datos->correo ?></td>
-                                                                <td><?= $datos->telefono ?></td>
-                                                                <td><?= $datos->direccion ?></td>
-                                                                <td>
-                                                                    <a href="../paginasAdmin/editor_cliente.php?cedula=<?= $datos->cedula ?>" class="btn btn-outline-primary">
-                                                                        Modificar
-                                                                    </a>
-                                                                    <a href="../paginasAdmin/adminProduct.php?cedula=<?= $datos->cedula ?>" class="btn btn-outline-primary">
-                                                                        Eliminar
-                                                                    </a>
-                                                                </td>
+                                                            <tr>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
                                                             </tr>
-                                                            <?php } 
-                                                            ?>
                                                         </tbody> 
                                                     </table>
                                                 </form>                                         
@@ -201,65 +346,69 @@
                         </div>
                     </div>
                 </div>
-                 <!--Modal Administradores-->
-                <div class="col-4 d-flex justify-content-center">
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop3">
-                        Administradores
-                    </button>
+                <!--Modal Campaña-->
+                <div class="col-2 d-flex justify-content-center">
+                    <!--BTN Dropdown-->
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle bg-primary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Campaña
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop5">
+                                        Consulta campaña
+                                    </button>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item text-center" href="../paginas/registrar_campaña.php">
+                                    <button type="button" class="btn btn-primary">
+                                        Registrar campaña
+                                    </button>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+       
                     <!-- Modal -->
-                    <div class="modal fade" id="staticBackdrop3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal fade" id="staticBackdrop5" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-fullscreen">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Administradores</h1>
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Campañas</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
                                     <div class="container-fluid">
                                         <div class="row py-3">
-                                            <h5>Administadores registrados</h5>
+                                            <h5>Campañas Registradas</h5>
                                         </div>
-                                        <!--Tabla administradores registrados-->
+                                        <!--Tabla catálogo-->
                                         <div class="row">
                                             <div class="col">
                                                 <form class="table-responsive tb">
                                                     <table class="table table-striped table-hover table-bordered m-3">
                                                         <thead>
                                                             <tr>
-                                                                <th>Cedula</th>
                                                                 <th>Nombre</th>
-                                                                <th>Apellido</th>
-                                                                <th>Contraseña</th>
-                                                                <th>Codigo</th>                                                             
+                                                                <th>Fecha de inicio</th>
+                                                                <th>Fecha final</th>                                                        
                                                             </tr>                   
                                                         </thead>
                                                         <tbody>
-                                                            <?php
-
-                                                            include '../paginas/conexion_db.php';
-                                                            include '../paginas/eliminar_admin.php';
-                                                            
-                                                                
-                                                            $sql = $conexion->query("SELECT * FROM administrador");
-                                                            while($datos = $sql->fetch_object()) { ?>
                                                             <tr>
-                                                                <td><?= $datos->cedula_admin ?></td>
-                                                                <td><?= $datos->nombre_admin ?></td>
-                                                                <td><?= $datos->apellido_admin ?></td>
-                                                                <td><?= $datos->contra_admin ?></td>
-                                                                <td><?= $datos->codigo_admin ?></td>
                                                                 <td>
-                                                                    <a href="../paginasAdmin/editor_admin.php?cedula_admin=<?= $datos->cedula_admin ?>" class="btn btn-outline-primary">
-                                                                        Modificar
-                                                                    </a>
-                                                                    <a href="../paginasAdmin/adminProduct.php?cedula_admin=<?= $datos->cedula_admin ?>" class="btn btn-outline-primary">
-                                                                        Eliminar
-                                                                    </a>
+                                                                    
+                                                                </td>
+                                                                <td>
+                                                                    
+                                                                </td>
+                                                                <td>
+                                                                    
                                                                 </td>
                                                             </tr>
-                                                            <?php } 
-                                                            ?>
                                                         </tbody> 
                                                     </table>
                                                 </form>                                         
