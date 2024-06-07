@@ -20,7 +20,7 @@ if(!empty($_POST["btnmodificaradmin"])){
             </script>
             ';
         }else{
-            echo "<div class='alert alert-danger'>Error al actualizar el aadministrador</div>";
+            echo "<div class='alert alert-danger'>Error al actualizar el administrador</div>";
         }
     }else{
         echo "<div class='alert alert-warning'>No pueden exixtir campos Vacios</div>";

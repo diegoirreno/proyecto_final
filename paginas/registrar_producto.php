@@ -2,12 +2,21 @@
 <?php
 require '../paginas/conexion_db.php';
 require 'database.php';
-require 'productoFunciones.php';
 
 $db = new Database();
 $con = $db->conectar();
 
 $errors = [];
+
+function registrar(array $datos,$conexion)
+{
+    $sql = $conexion->prepare("INSERT INTO productos (codigo, nombre, descripcion, disponibilidad, precio, descuento, catalogo) 
+    VALUES(?,?,?,1,?,0,?)");
+    if($sql->execute($datos)){
+        return true;
+    }
+    return false;
+}
 
 if(!empty($_POST)){
 

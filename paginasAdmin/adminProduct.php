@@ -309,7 +309,7 @@
                                 <div class="modal-body">
                                     <div class="container-fluid">
                                         <div class="row py-3">
-                                            <h5>Catálogos Registrados</h5>
+                                            <h5>Campañas Registradas</h5>
                                         </div>
                                         <!--Tabla catálogo-->
                                         <div class="row">
@@ -318,20 +318,22 @@
                                                     <table class="table table-striped table-hover table-bordered m-3">
                                                         <thead>
                                                             <tr>
-                                                                <th>a</th>
-                                                                <th>a</th>
-                                                                <th>a</th>
-                                                                <th>a</th>
-                                                                <th>a</th>                                                             
+                                                                <th>Nombre</th>
+                                                                <th>Fecha de inicio</th>
+                                                                <th>Fecha final</th>                                                        
                                                             </tr>                   
                                                         </thead>
                                                         <tbody>
                                                             <tr>
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td></td>
+                                                                <td>
+                                                                    
+                                                                </td>
+                                                                <td>
+                                                                    
+                                                                </td>
+                                                                <td>
+                                                                    
+                                                                </td>
                                                             </tr>
                                                         </tbody> 
                                                     </table>
@@ -386,30 +388,43 @@
                                         <div class="row py-3">
                                             <h5>Campañas Registradas</h5>
                                         </div>
-                                        <!--Tabla catálogo-->
+                                        <!--Tabla campaña-->
                                         <div class="row">
                                             <div class="col">
                                                 <form class="table-responsive tb">
                                                     <table class="table table-striped table-hover table-bordered m-3">
                                                         <thead>
                                                             <tr>
-                                                                <th>Nombre</th>
-                                                                <th>Fecha de inicio</th>
-                                                                <th>Fecha final</th>                                                        
+                                                                <th>Nombre</th> 
+                                                                <th>Fecha Inicio</th>
+                                                                <th>Fecha Fin</th>                                                            
                                                             </tr>                   
                                                         </thead>
                                                         <tbody>
-                                                            <tr>
+                                                            <?php
+
+                                                            include '../paginas/conexion_db.php';
+                                                            include '../paginas/eliminar_campaña.php';
+                                                            
+                                                                
+                                                            $sql = $conexion->query("SELECT * FROM campana");
+                                                            while($datos = $sql->fetch_object()) { ?>
+                                                            <tr class="text-center">
+                                                            <input type="hidden" name="id" value="<?= $datos->id ?>">
+                                                                <td><?= $datos->nombre ?></td>
+                                                                <td><?= $datos->fecha_inicio ?></td>
+                                                                <td><?= $datos->fecha_fin ?></td>
                                                                 <td>
-                                                                    
-                                                                </td>
-                                                                <td>
-                                                                    
-                                                                </td>
-                                                                <td>
-                                                                    
+                                                                    <a href="../paginasAdmin/editor_campana.php?id=<?= $datos->id ?>" class="btn btn-outline-primary">
+                                                                        Modificar
+                                                                    </a>
+                                                                    <a href="../paginasAdmin/adminProduct.php?id=<?= $datos->id ?>" class="btn btn-outline-primary">
+                                                                        Eliminar
+                                                                    </a>
                                                                 </td>
                                                             </tr>
+                                                            <?php } 
+                                                            ?>
                                                         </tbody> 
                                                     </table>
                                                 </form>                                         

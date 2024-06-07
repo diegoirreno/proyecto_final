@@ -1,38 +1,46 @@
 <?php
 require '../paginas/conexion_db.php';
 require 'database.php';
-require 'productoFunciones.php';
 
 $db = new Database();
 $con = $db->conectar(); 
 
 $errors = [];
 
+function registrar(array $datos,$conexion)
+{
+    $sql = $conexion->prepare("INSERT INTO campana (nombre, fecha_inicio, fecha_fin) 
+    VALUES(?,?,?)");
+    if($sql->execute($datos)){
+        return true;
+    }
+    return false;
+}
+
+
 if(!empty($_POST)){
 
-    $codigo = trim($_POST['codigo_produ']);
-    $nombre = trim($_POST['nombre_produ']);
-    $descripcion = trim($_POST['descripcion_produ']);
-    $precio = trim($_POST['precio_produ']);
-    $catalogo = trim($_POST['tipo_catalogo']);
+    $nombre = trim($_POST['nombre_campana']);
+    $fechaI = trim($_POST['fecha_ini']);
+    $fechaF = trim($_POST['fecha_fin']);
 
 
-    $validar = "SELECT * FROM productos WHERE codigo = '$codigo' ";
+    $validar = "SELECT * FROM campana WHERE fecha_inicio = '$fechaI' || fecha_fin = '$fechaF'";
     $validando = $conexion->query($validar);
 
     if($validando->num_rows > 0){
         
-    echo "<div class='alert alert-warning'>No puedes agregar dos productos con el mismo codigo</div>"; 
+    echo "<div class='alert alert-warning'>No puedes agregar dos campañas con la misma duracion</div>"; 
 
     }else{
    
 
-    $id = registrar([$codigo,$nombre,$descripcion,$precio,$catalogo], $conexion);
+    $id = registrar([$nombre,$fechaI,$fechaF], $conexion);
 
     if($id > 0){
-        echo "<div class='alert alert-success'>El producto fue registrado con exito</div>";
+        echo "<div class='alert alert-success'>La campaña fue registrada con exito</div>";
     }else{
-        $errors[] = "Error al registrar el producto";
+        $errors[] = "Error al registrar la campaña";
     }
 
     if(count($errors) == 0){
@@ -80,7 +88,7 @@ if(!empty($_POST)){
                 </nav>
             </div>
             <div class="row d-flex justify-content-center">
-                <form class="col-3 p-3 form" action="../paginas/registrar_producto.php" method="post" autocomplete="off">
+                <form class="col-3 p-3 form" action="../paginas/registrar_campaña.php" method="post" autocomplete="off">
                     <div class="row">
                         <div class="col d-flex justify-content-center">
                             <h3>Registro de campaña</h3>
@@ -98,13 +106,13 @@ if(!empty($_POST)){
                     <div class="row">
                         <div class="col">
                             <label for="name">Nombre</label>
-                            <input type="text" name="name" id="" class="form-control border border-dark border-1" required>
+                            <input type="text" name="nombre_campana" id="nombre_campana" class="form-control border border-dark border-1" required>
 
                             <label for="fechaI">Fecha de inicio</label>
-                            <input type="date" name="fechaI" id="" class="form-control border border-dark border-1" required>
+                            <input type="date" name="fecha_ini" id="fecha_ini" class="form-control border border-dark border-1" required>
 
                             <label for="fechaF">Fecha de finalizado</label>
-                            <input type="date" name="fechaF" id="" class="form-control border border-dark border-1" required>
+                            <input type="date" name="fecha_fin" id="fecha_fin" class="form-control border border-dark border-1" required>
                         </div>
                     </div>
                     
