@@ -294,12 +294,32 @@
                 </div>     
                 <!--Modal Catálogo-->
                 <div class="col-2 d-flex justify-content-center">
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop4">
-                        Catálogo
-                    </button>
+                    <!--BTN Dropdown-->
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle bg-primary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Catálogo
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop6">
+                                        Consulta catálogo
+                                    </button>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item text-center" href="../paginas/registrar_catalogo.php">
+                                    <button type="button" class="btn btn-primary">
+                                        Registrar catálogo
+                                    </button>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+       
                     <!-- Modal -->
-                    <div class="modal fade" id="staticBackdrop4" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal fade" id="staticBackdrop6" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-fullscreen">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -309,32 +329,66 @@
                                 <div class="modal-body">
                                     <div class="container-fluid">
                                         <div class="row py-3">
-                                            <h5>Campañas Registradas</h5>
+                                            <h5>Catálogos Registrados</h5>
                                         </div>
-                                        <!--Tabla catálogo-->
+                                        <!--Tabla catalogo-->
                                         <div class="row">
                                             <div class="col">
                                                 <form class="table-responsive tb">
                                                     <table class="table table-striped table-hover table-bordered m-3">
                                                         <thead>
                                                             <tr>
-                                                                <th>Nombre</th>
-                                                                <th>Fecha de inicio</th>
-                                                                <th>Fecha final</th>                                                        
+                                                                <th>Nombre</th> 
+                                                                <th>Campaña</th>                                                           
                                                             </tr>                   
                                                         </thead>
                                                         <tbody>
-                                                            <tr>
+                                                            <?php
+
+                                                            include '../paginas/conexion_db.php';
+                                                            include '../paginas/eliminar_catalogo.php';
+                                                            
+                                                                
+                                                            $sql = $conexion->query("SELECT * FROM catalogo");
+                                                            while($datos = $sql->fetch_object()) { ?>
+                                                            <tr class="text-center">
+                                                            <input type="hidden" name="id" value="<?= $datos->id ?>">
+
+                                                            <td><?= htmlspecialchars($datos->nombre); ?></td>
+                                                            <td>
+                                                            <?php
+                                                            // Obtener el id de la campaña actual
+                                                            $id_final = $datos->id_campana; 
+
+                                                            // Realizar la consulta para obtener los tipos de campaña
+                                                            $tipo_campana = $conexion->query("SELECT id, nombre FROM campana");
+
+                                                            // Variable para almacenar el nombre de la campaña encontrada
+                                                            $nombre_campana = "Otra campaña";
+
+                                                            // Recorrer todos los resultados
+                                                            while ($row = $tipo_campana->fetch_assoc()) { 
+                                                            if ($id_final == $row['id']) {
+                                                            $nombre_campana = $row['nombre'];
+                                                            break; // Salir del bucle cuando se encuentra la coincidencia
+                                                                        }
+                                                                     }
+
+                                                            // Imprimir el nombre de la campaña encontrada
+                                                            echo htmlspecialchars($nombre_campana);
+                                                            ?>
+                                                            </td>
                                                                 <td>
-                                                                    
-                                                                </td>
-                                                                <td>
-                                                                    
-                                                                </td>
-                                                                <td>
-                                                                    
+                                                                    <a href="../paginasAdmin/editor_catalogo.php?id=<?= $datos->id ?>" class="btn btn-outline-primary">
+                                                                        Modificar
+                                                                    </a>
+                                                                    <a href="../paginasAdmin/adminProduct.php?id=<?= $datos->id ?>" class="btn btn-outline-primary">
+                                                                        Eliminar
+                                                                    </a>
                                                                 </td>
                                                             </tr>
+                                                            <?php } 
+                                                            ?>
                                                         </tbody> 
                                                     </table>
                                                 </form>                                         
