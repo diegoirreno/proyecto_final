@@ -1,5 +1,4 @@
-<?php 
-
+<?php
 require '../paginas/config.php';
 
 if(isset($_POST['codigo'])){
@@ -12,7 +11,7 @@ if(isset($_POST['codigo'])){
 
     if($token == $token_tmp && $cantidad>0 && is_numeric($cantidad)){
 
-        if(isset( $_SESSION['carrito']['productos'][$codigo])){
+        if(isset($_SESSION['carrito']['productos'][$codigo])){
 
             $_SESSION['carrito']['productos'][$codigo] += $cantidad;
 
@@ -22,7 +21,7 @@ if(isset($_POST['codigo'])){
         }
 
         $datos['numero'] = count($_SESSION['carrito']['productos']);
-        $datos['ok'] = false;
+        $datos['ok'] = true; // Cambiado a true cuando se agrega correctamente el producto al carrito
 
     }else{
         $datos['ok'] = false;
@@ -33,5 +32,4 @@ if(isset($_POST['codigo'])){
 }
 
 echo json_encode($datos);
-
 ?>

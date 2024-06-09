@@ -149,24 +149,25 @@
     <!-- Custom JS -->
     <!--<script src="js/script.js"></script>-->
     <script>
-        function addProducto(codigo, token) {
-            let url = 'carrito.php'
-            let formData = new FormData()
-            formData.append('codigo', codigo)
-            formData.append('token', token)
+    function addProducto(codigo, token) {
+        let url = 'carrito.php'
+        let formData = new FormData()
+        formData.append('codigo', codigo)
+        formData.append('token', token)
 
-            fetch(url, {
-                method: 'POST',
-                body: formData,
-                mode: 'cors'
-            }).then(response => response.json())
-            .then(data => {
-                if (data.ok) {
-                    let elemento = document.getElementById("num_cart")
-                    elemento.innerHTML = data.numero
-                }
-            })
-        }
+        fetch(url, {
+            method: 'POST',
+            body: formData,
+            mode: 'cors'
+        }).then(response => response.json())
+        .then(data => {
+            if (data.ok) {
+                // Actualizar el número del carrito en la página
+                let elemento = document.getElementById("num_cart")
+                elemento.innerHTML = data.numero
+            }
+        })
+    }
     </script>
 </body>
 

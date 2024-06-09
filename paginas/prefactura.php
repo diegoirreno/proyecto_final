@@ -1,6 +1,10 @@
 
 <?php
 
+
+    ob_start(); // Iniciar el almacenamiento en búfer de salida
+
+
     include 'config.php';
     include 'database.php';
     require '../paginas/conexion_db.php';
@@ -88,7 +92,7 @@
         <div class="container-fluid p-0">
             <div class="row text-center my-3">
                 <div class="col">
-                    <h4>Prefactura</h4>
+                <h4>Prefactura </h4>
                 </div>
             </div>
             <div>
@@ -158,7 +162,6 @@
                      </div>
             </div>
             <!---->
-            <a type="button" href="../indexF.php">Finalizar
             <?php
             
             $sql = $conexion->prepare("INSERT INTO prefactura(fecha, correo_cli,cedula_cli,total) VALUES (?,?,?,?)");
@@ -184,11 +187,11 @@
                     precio_producto, cantidad) VALUES (?,?,?,?,?)");
                     $sql_insert ->execute([$last_id, $clave, $row_prod['nombre'], $precio_desc, $cantidad]);
 
-                    }
+                    } 
                     
                 }
+
             }
-            session_destroy();
             ?>
             </a>
         </div>
@@ -231,3 +234,30 @@
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
+
+<?php
+$html = ob_get_clean(); // Obtener el contenido del búfer y limpiarlo
+
+require_once '../libreria/dompdf/autoload.inc.php';
+
+use Dompdf\Dompdf;
+$dompdf = new Dompdf();
+
+$options = $dompdf->getOptions();
+$options->set(array('isRemoteEnabled' => true));
+$dompdf->setOptions($options);
+
+$dompdf->loadHtml($html); // Cargar el HTML generado
+
+$dompdf->setPaper('A4', 'landscape');
+
+$dompdf->render();
+
+$nombre_archivo = "Prefactura # : " . $last_id . ".pdf";
+$dompdf->stream($nombre_archivo, array("Attachment" => true));
+
+unset($_SESSION['carrito']);
+
+header("Location: ../indexF.php");
+exit(); 
+?>
