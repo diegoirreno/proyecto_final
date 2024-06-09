@@ -182,7 +182,7 @@
                     </div>
                 </div>
                 <!--Modal Productos-->
-                <div class="col-4 d-flex justify-content-center">
+                <div class="col-2 d-flex justify-content-center">
                     <!--BTN Dropdown-->
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle bg-primary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -298,7 +298,58 @@
                             </div>
                         </div>
                     </div>
-                </div>     
+                </div>
+                
+                <!--Modal prefactura-->
+                <div class="col-2 d-flex justify-content-center">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop4">
+                        Prefactura
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="staticBackdrop4" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-fullscreen">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Prefactura</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="container-fluid">
+                                        <div class="row py-3">
+                                            <h5>Prefacturas registradas</h5>
+                                        </div>
+                                        <!--Tabla prefacturas registradas-->
+                                        <div class="row">
+                                            <div class="col">
+                                                <form class="table-responsive tb">
+                                                    <table class="table table-striped table-hover table-bordered m-3">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Cedula</th>
+                                                                <th>Nombre</th>
+                                                                <th>Apellido</th>
+                                                                <th>Contraseña</th>
+                                                                <th>Codigo</th>                                                             
+                                                            </tr>                   
+                                                        </thead>
+                                                        <tbody>
+                                                            <!-- Inserte aqui su contenido-->
+                                                        </tbody> 
+                                                    </table>
+                                                </form>                                         
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">                                       
+                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!--Modal Catálogo-->
                 <div class="col-2 d-flex justify-content-center">
                     <!--BTN Dropdown-->
