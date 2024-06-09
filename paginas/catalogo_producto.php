@@ -9,9 +9,6 @@
     $sql->execute();
     $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 
-    //session_destroy();
-    //print_r($_SESSION);
-
 ?>
 <!DOCTYPE html>
 <html lang="es">

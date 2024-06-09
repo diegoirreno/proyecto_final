@@ -185,17 +185,9 @@
                     $sql_insert ->execute([$last_id, $clave, $row_prod['nombre'], $precio_desc, $cantidad]);
 
                     }
-                }else{
-                    echo'
-                    <script>
-                     alert("Error al insertar los datos");
-                    window.location = "indexF.php"
-                    </script>
-                    ';
+                    
                 }
             }
-            
-
             session_destroy();
             ?>
             </a>

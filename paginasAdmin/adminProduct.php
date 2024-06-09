@@ -204,6 +204,13 @@
                                     </button>
                                 </a>
                             </li>
+                            <li>
+                                <a class="dropdown-item text-center" href="../paginas/reportes.php">
+                                    <button type="button" class="btn btn-primary">
+                                        Reporte productos
+                                    </button>
+                                </a>
+                            </li>
                         </ul>
                     </div>
             
