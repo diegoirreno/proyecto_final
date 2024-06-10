@@ -42,8 +42,9 @@ $sql = $conexion->query("SELECT * FROM productos WHERE codigo=$codigo")
                     
                                 <label for="disponibilidad producto">Disponible</label>
                                 <select name="disponibilidad_produ" class="form-control border border-dark border-1" value="<?= $datos->disponibilidad ?>" required>
-                                <option value="1">Sí</option>
-                                <option value="0">No</option>
+                                    <option value="">Seleccionar</option>
+                                    <option value="1">Sí</option>
+                                    <option value="0">No</option>
                                 </select>
 
                                 <label for="precio">Precio</label>
@@ -54,6 +55,7 @@ $sql = $conexion->query("SELECT * FROM productos WHERE codigo=$codigo")
 
                                 <label for="tipo_catalogo">Catalogo</label>
                                 <select name="tipo_catalogo" class="form-control border border-dark border-1" value="<?= $datos->catalogo ?>" required>
+                                <option value="">Seleccionar</option>   
                                 <?php
                                 $tipo_catalogo = $conexion->query("SELECT id, nombre FROM catalogo");
                                 while ($row = $tipo_catalogo->fetch_assoc()) { ?>
