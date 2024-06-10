@@ -18,6 +18,14 @@
             <nav class="row navbar navbar-expand-md navbar-light bg-light border-bottom border-primary">
                 <div class="col-3"> 
                     <a href="./indexF.php" class="navbar-brand">Distribuciones Irreño</a>
+                </div> 
+                <div class="col-9 d-flex justify-content-end">
+                    <a class="btn btn-outline-primary" href="indexF.php">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+                            <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z"/>
+                        </svg>
+                        Volver al menú principal
+                    </a>
                 </div>     
             </nav>
             <div class="row">
@@ -71,11 +79,6 @@
                         <button>Regístrarse</button>
                     </form> 
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <a class="nav-link" href="indexF.php">Volver al menu principal</a>
             </div>
         </div>
     </main>
