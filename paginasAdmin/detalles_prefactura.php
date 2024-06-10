@@ -3,7 +3,6 @@
 require '../paginas/conexion_db.php';
 
 $id =$_GET["id"];
-$sql = $conexion->query("SELECT * FROM detalle_prefactura WHERE id=$id")
 
 ?>
 <!DOCTYPE html>
@@ -22,40 +21,35 @@ $sql = $conexion->query("SELECT * FROM detalle_prefactura WHERE id=$id")
             <div class="col">
                 <form method="POST" class="p-3 form">
                         <h5>Detalle prefactura</h5>
-                        <input type="h" name="id" value="<?= $_GET["id"] ?>">
-
-                    <?php 
-
-                    echo "Detalles de la prefactura : $id";
-
-                    while($datos=$sql->fetch_object()){ ?>
+                        <input type="hidden" name="id" value="<?= $_GET["id"] ?>">
+                        <?php
+                        echo "Detalles de la prefactura : $id";
+                        ?>
+                        <table class="table table-striped table-hover table-bordered m-3">
                             
-                        <div class="row d-flex justify-content-center">
-                            <div class="col-4 mt-3 modifyC">
-                                <label for="name">Codigo</label>
-                                <input type="text" name="codigo_producto" class="form-control border border-dark border-1 " value="<?= $datos->codigo_producto ?>" required>
-
-                                <label for="lastname">Nombre</label>
-                                <input type="text" name="nombre_producto" class="form-control border border-dark border-1" value="<?= $datos->nombre_producto ?>" required>
-
-                                <label for="password">Precio</label>
-                                <input type="password" name="precio_producto" class="form-control border border-dark border-1" value="<?= $datos->precio_producto ?>" required>
-
-
-                                <label for="code">Cantidad</label>
-                                <input type="number" name="cantidad" class="form-control border border-dark border-1" value="<?= $datos->cantidad ?>" required>
-                            </div>
-                        </div>
-                            
-                    <?php }
-                    ?>
-                    <div class="row d-flex justify-content-center">
-                        <div class="col-3 d-flex justify-content-center mt-3">
-                            <button type="submit" class="btn btn-primary" value="ok">
-                                Modificar Administrador
-                            </button>
-                        </div>
-                    </div>
+                            <thead>
+                                <tr>
+                                    <th>Codigo Producto</th>
+                                    <th>Nombre del producto</th>
+                                    <th>Precio del producto</th>
+                                    <th>cantidad</th>                                                             
+                                </tr>                   
+                            </thead>
+                            <tbody>
+                                <?php
+                                                             
+                                $sql = $conexion->query("SELECT * FROM detalle_prefactura WHERE id_prefactura=$id");
+                                while($datos = $sql->fetch_object()) { ?>
+                                <tr class="text-center">
+                                <td><?= $datos->codigo_producto ?></td>
+                                <td><?= $datos->nombre_producto ?></td>
+                                <td><?= $datos->precio_producto ?></td>
+                                <td><?= $datos->cantidad ?></td>
+                                </tr>
+                                <?php } 
+                                ?>
+                            </tbody> 
+                        </table>
                     <div class="row d-flex justify-content-center">
                         <div class="col-3 d-flex justify-content-center">
                             <a href="adminProduct.php" class="">
