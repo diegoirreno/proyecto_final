@@ -98,5 +98,5 @@ $dompdf->setPaper('A4', 'landscape');
 $dompdf->render();
 
 $nombre_archivo = "reporte_productos_" . date("Y-m-d") . ".pdf";
-$dompdf->stream($nombre_archivo, array("Attachment" => false));
+$dompdf->stream($nombre_archivo, array("Attachment" => true));
 ?>

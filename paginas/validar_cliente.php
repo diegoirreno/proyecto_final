@@ -18,6 +18,7 @@
         echo '
             <script>
                 var cedula = "' . $cedula . '";
+                alert("El cliente está registrado, proceda con la prefactura");
                 window.location.href = "prefactura.php?cedula=" + encodeURIComponent(cedula);
             </script>
            

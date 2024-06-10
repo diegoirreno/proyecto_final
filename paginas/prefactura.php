@@ -1,10 +1,6 @@
 
 <?php
 
-
-    ob_start(); // Iniciar el almacenamiento en búfer de salida
-
-
     include 'config.php';
     include 'database.php';
     require '../paginas/conexion_db.php';
@@ -92,109 +88,109 @@
         <div class="container-fluid p-0">
             <div class="row text-center my-3">
                 <div class="col">
-                <h4>Prefactura </h4>
+                    <h4>Prefactura </h4>
                 </div>
             </div>
             <div>
                 <?php
-                     echo "<p>Nombre: $nombre </p>";
-                     echo "<p>Apellido: $apellido</p>";
-                     echo "<p>Correo: $correo</p>";
-                     echo "<p>Telefono: $telefono</p>";
-                     echo "<p>Direccion: $direccion</p>";
+                echo "<p>Nombre: $nombre</p>";
+                echo "<p>Apellido: $apellido</p>";
+                echo "<p>Correo: $correo</p>";
+                echo "<p>Teléfono: $telefono</p>";
+                echo "<p>Dirección: $direccion</p>";
                 ?>
             </div>
-            <!--Row contenedora del Hero-->
             <div class="row mt-3">
-                <!--Col izquierda que contiene la cola de los productos-->
-                <div class="col" >
-                        <div class="table-responsive tb ">
-                            <table class="table table-striped table-hover table-bordered m-3">
-                                <thead>
+                <div class="col">
+                    <div class="table-responsive tb">
+                        <table class="table table-striped table-hover table-bordered m-3">
+                            <thead>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Nombre Producto</th>
+                                    <th>Valor unitario</th>
+                                    <th>Cantidad</th>
+                                    <th>Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                if ($lista_carrito == null) {
+                                    echo '<tr>
+                                            <td colspan="5"><center>Lista vacía, no has agregado productos</center></td>
+                                          </tr>';
+                                } else {
+                                    $total = 0;
+                                    foreach ($lista_carrito as $producto) {
+                                        $codigo = htmlspecialchars($producto['codigo']);
+                                        $nombre_producto = htmlspecialchars($producto['nombre']);
+                                        $precio = $producto['precio'];
+                                        $descuento = $producto['descuento'];
+                                        $cantidad = $producto['cantidad'];
+                                        $precio_desc = $precio - (($precio * $descuento) / 100);
+                                        $subtotal = $cantidad * $precio_desc;
+                                        $total += $subtotal;
+                                ?>
                                     <tr>
-                                        <th>Código</th>
-                                        <th>Nombre Producto</th>
-                                        <th>Valor unitario</th>
-                                        <th>Cantidad</th>
-                                        <th>Subtotal</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php if($lista_carrito == null){
-                                        echo '<tr>
-                                            <td colspan="5"><center>Lista vacia, no has agregado productos</center></td>
-                                            </tr>'; 
-                                    }else{
-
-                                        $total = 0;
-                                        foreach($lista_carrito as $producto){
-
-                                            $_codigo = $producto['codigo'];
-                                            $nombre = $producto['nombre'];
-                                            $precio = $producto['precio'];
-                                            $descuento = $producto['descuento'];
-                                            $cantidad = $producto['cantidad'];
-                                            $precio_desc = $precio - (($precio*$descuento)/100);
-                                            $subtotal = $cantidad * $precio_desc;
-                                            $total += $subtotal;
-                                        ?>   
-                                    <tr>
-                                        <td><?php echo $_codigo ?></td>    
-                                        <td><?php echo $nombre ?></td>
-                                        <td><?php echo MONEDA . number_format($precio_desc,0, '.', ','); ?></td>
-                                        <td><?php echo $cantidad ?></td>
+                                        <td><?php echo $codigo; ?></td>
+                                        <td><?php echo $nombre_producto; ?></td>
+                                        <td><?php echo MONEDA . number_format($precio_desc, 0, '.', ','); ?></td>
+                                        <td><?php echo $cantidad; ?></td>
                                         <td>
-                                            <div id="subtotal_<?php echo $_codigo; ?>" name="subtotal[]"><?php echo MONEDA . 
-                                            number_format($subtotal,0, '.', ','); ?></div>
+                                            <div id="subtotal_<?php echo $codigo; ?>" name="subtotal[]"><?php echo MONEDA . number_format($subtotal, 0, '.', ','); ?></div>
                                         </td>
                                     </tr>
-                                    <?php } ?>
-                                    <tr>
-                                        <td colspan="3"></td>
-                                        <td colspan="2">
-                                            <p class="h3 text-end" id="total">Total: <?php echo MONEDA.number_format($total, 0, '.',','); ?></p>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                             <?php } ?>
-                            </table>
-                         </div>
-                     </div>
+                                <?php } ?>
+                                <tr>
+                                    <td colspan="3"></td>
+                                    <td colspan="2">
+                                        <p class="h3 text-end" id="total">Total: <?php echo MONEDA . number_format($total, 0, '.', ','); ?></p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <?php } ?>
+                        </table>
+                    </div>
+                </div>
             </div>
-            <!---->
             <?php
-            
-            $sql = $conexion->prepare("INSERT INTO prefactura(fecha, correo_cli,cedula_cli,total) VALUES (?,?,?,?)");
-            $sql->execute([$fecha,$correo,$cedula,$total]);
-            
-            if($sql)
-            {
+            $sql = $conexion->prepare("INSERT INTO prefactura(fecha, correo_cli, cedula_cli, total) VALUES (?, ?, ?, ?)");
+            $sql->bind_param("ssii", $fecha, $correo, $cedula, $total);
+            $sql->execute();
+
+            if ($sql) {
                 $last_id = $conexion->insert_id;
                 $productos = isset($_SESSION['carrito']['productos']) ? $_SESSION['carrito']['productos'] : null;
 
-                if($productos != null) {
+                if ($productos) {
+                    foreach ($productos as $clave => $cantidad) {
+                        $sql = $con->prepare("SELECT codigo, nombre, precio, descuento, disponibilidad, ? AS cantidad FROM productos WHERE codigo = ? AND disponibilidad = 1");
+                        $sql->execute([$cantidad, $clave]);
+                        $row_prod = $sql->fetch(PDO::FETCH_ASSOC);
 
-                    foreach($productos as $clave => $cantidad){
-                    $sql = $con->prepare("SELECT codigo,nombre,precio,descuento,disponibilidad, $cantidad AS cantidad FROM productos WHERE codigo=? AND disponibilidad = 1");
-                    $sql->execute([$clave]);
-                    $row_prod = $sql->fetch(PDO::FETCH_ASSOC); 
+                        $precio = $row_prod['precio'];
+                        $descuento = $row_prod['descuento'];
+                        $precio_desc = $precio - (($precio * $descuento) / 100);
 
-                    $precio = $row_prod['precio'];
-                    $descuento = $row_prod['descuento'];
-                    $precio_desc = $precio -(($precio*$descuento)/100);
-
-                    $sql_insert= $conexion->prepare("INSERT INTO detalle_prefactura (id_prefactura, codigo_producto, nombre_producto, 
-                    precio_producto, cantidad) VALUES (?,?,?,?,?)");
-                    $sql_insert ->execute([$last_id, $clave, $row_prod['nombre'], $precio_desc, $cantidad]);
-
-                    } 
-                    
+                        $sql_insert = $conexion->prepare("INSERT INTO detalle_prefactura (id_prefactura, codigo_producto, nombre_producto, precio_producto, cantidad) VALUES (?, ?, ?, ?, ?)");
+                        $sql_insert->bind_param("iisdi", $last_id, $clave, $row_prod['nombre'], $precio_desc, $cantidad);
+                        $sql_insert->execute();
+                    }
                 }
-
             }
             ?>
-            </a>
         </div>
+        <a class="dropdown-item text-center" href="../paginas/prefactura_final.php?cedula=<?php echo $cedula; ?>&id_prefactura=<?php echo $last_id; ?>">
+        <button type="button" class="btn btn-primary">Imprimir prefactura</button>
+        </a>
+        <a class="dropdown-item text-center" href="../indexF.php">
+        <button type="button" class="btn btn-primary">
+            Finalizar
+            <?php 
+            unset($_SESSION['carrito']);
+            ?>
+        </button>
+        </a>
     </main>
     <footer>
         <div class="container-fluid bg-light p-0">
@@ -234,29 +230,3 @@
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
-
-<?php
-$html = ob_get_clean(); // Obtener el contenido del búfer y limpiarlo
-
-require_once '../libreria/dompdf/autoload.inc.php';
-
-use Dompdf\Dompdf;
-$dompdf = new Dompdf();
-
-$options = $dompdf->getOptions();
-$options->set(array('isRemoteEnabled' => true));
-$dompdf->setOptions($options);
-
-$dompdf->loadHtml($html); // Cargar el HTML generado
-
-$dompdf->setPaper('A4', 'landscape');
-
-$dompdf->render();
-
-$nombre_archivo = "Prefactura # : " . $last_id . ".pdf";
-$dompdf->stream($nombre_archivo, array("Attachment" => true));
-
-unset($_SESSION['carrito']);
-header("Location: ../indexF.php");
-exit(); 
-?>
