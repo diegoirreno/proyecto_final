@@ -28,3 +28,6 @@ input[type='number']::-webkit-outer-spin-button{
     border-radius: 3px;
 }
 
+#space{
+    height: 300px;
+}
