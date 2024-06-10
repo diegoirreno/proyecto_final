@@ -5,7 +5,7 @@
     $db = new Database();
     $con = $db->conectar();
 
-    $sql = $con->prepare("SELECT codigo,nombre,precio FROM productos WHERE disponibilidad = 1 AND catalogo = 2");
+    $sql = $con->prepare("SELECT codigo,nombre,precio,descuento FROM productos WHERE disponibilidad = 1 AND catalogo = 2");
     $sql->execute();
     $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 
@@ -87,7 +87,16 @@
                                 <div class="card-body">
                                     <h5 class="card-title"><?php echo mb_convert_case($row['nombre'],MB_CASE_UPPER); ?></h5>
                                     <p class="card-text text-end"><small class="text-body-secondary">Código: <?php echo mb_convert_case($row['codigo'],MB_CASE_UPPER); ?></small>
-                                    <p class="card-text text-end"><small class="text-body-secondary">Precio: $<?php echo $row['precio']; ?></small>
+                                    <p class="card-text text-end"><small class="text-body-secondary">Precio: $<?php 
+                                    $descuento = $row['descuento'];
+                                    $precio = $row['precio'];
+                                    if($descuento == 0){
+                                        echo $precio;
+                                    }else{
+                                        $precio_final = ($precio-(($descuento*$precio)/100));
+                                        echo $precio_final;
+                                    }
+                                    ?></small>
                                     </p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">

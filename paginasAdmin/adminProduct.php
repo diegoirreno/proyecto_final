@@ -326,15 +326,39 @@
                                                     <table class="table table-striped table-hover table-bordered m-3">
                                                         <thead>
                                                             <tr>
-                                                                <th>Cedula</th>
-                                                                <th>Nombre</th>
-                                                                <th>Apellido</th>
-                                                                <th>Contraseña</th>
-                                                                <th>Codigo</th>                                                             
+                                                                <th>Id</th>
+                                                                <th>Fecha</th>
+                                                                <th>Correo Cliente</th>
+                                                                <th>Cedula Cliente</th>
+                                                                <th>Total</th>                                                             
                                                             </tr>                   
                                                         </thead>
                                                         <tbody>
-                                                            <!-- Inserte aqui su contenido-->
+                                                            <?php
+
+                                                            include '../paginas/conexion_db.php';
+                                                            include '../paginas/eliminar_prefactura.php';
+                                                            
+                                                                
+                                                            $sql = $conexion->query("SELECT * FROM prefactura");
+                                                            while($datos = $sql->fetch_object()) { ?>
+                                                            <tr class="text-center">
+                                                                <td><?= $datos->id ?></td>
+                                                                <td><?= $datos->fecha ?></td>
+                                                                <td><?= $datos->correo_cli ?></td>
+                                                                <td><?= $datos->cedula_cli ?></td>
+                                                                <td><?= $datos->total ?></td>
+                                                                <td>
+                                                                    <a href="../paginasAdmin/detalles_prefactura.php?id=<?= $datos->id ?>" class="btn btn-outline-primary">
+                                                                        Detalles
+                                                                    </a>
+                                                                    <a href="../paginasAdmin/adminProduct.php?id=<?= $datos->id ?>" class="btn btn-outline-primary">
+                                                                        Eliminar
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                            <?php } 
+                                                            ?>
                                                         </tbody> 
                                                     </table>
                                                 </form>                                         
