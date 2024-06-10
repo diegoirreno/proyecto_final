@@ -257,7 +257,6 @@ $nombre_archivo = "Prefactura # : " . $last_id . ".pdf";
 $dompdf->stream($nombre_archivo, array("Attachment" => true));
 
 unset($_SESSION['carrito']);
-
 header("Location: ../indexF.php");
 exit(); 
 ?>

@@ -20,6 +20,7 @@
                 var cedula = "' . $cedula . '";
                 window.location.href = "prefactura.php?cedula=" + encodeURIComponent(cedula);
             </script>
+           
         ';
     } else {
         echo '
