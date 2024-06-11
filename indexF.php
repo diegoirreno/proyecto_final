@@ -84,7 +84,15 @@
                     <h4>Nuestros catálogos</h4>
                 </div>
             </div>
-            <div class="row d-flex align-items-center justify-content-center">
+            <div class="row">
+                <div class="col-4">
+                    <a class="carousel-control-prev bg-dark" type="button" href="#carouselC" data-bs-slide="prev">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-caret-left-square-fill" viewBox="0 0 16 16">
+                            <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm10.5 10V4a.5.5 0 0 0-.832-.374l-4.5 4a.5.5 0 0 0 0 .748l4.5 4A.5.5 0 0 0 10.5 12"/>
+                        </svg>
+                        <span class="sr-only">Anterior</span>
+                    </a>
+                </div>
                 <div class="col-4 p-0 bg-light">
                     <!--Carousel-->
                     <div id="carouselC" class="carousel slide">
@@ -104,15 +112,16 @@
                             </a>
                           </div>
                         </div>
-                        <a class="carousel-control-prev bg-light" type="button" href="#carouselC" data-bs-slide="prev">
-                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                          <span class="sr-only">Anterior</span>
-                        </a>
-                        <a class="carousel-control-next bg-light" type="button" href="#carouselC" data-bs-slide="next">
-                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                          <span class="sr-only">Siguiente</span>
-                        </a>
+                        
                       </div>
+                    </div>
+                    <div class="col-4">
+                        <a class="carousel-control-next bg-dark" type="button" href="#carouselC" data-bs-slide="next">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-caret-right-square-fill" viewBox="0 0 16 16">
+                                <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm5.5 10a.5.5 0 0 0 .832.374l4.5-4a.5.5 0 0 0 0-.748l-4.5-4A.5.5 0 0 0 5.5 4z"/>
+                            </svg>
+                            <span class="sr-only">Siguiente</span>
+                        </a>
                     </div>
                 </div>
             </div>
